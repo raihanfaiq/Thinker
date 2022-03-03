@@ -1,9 +1,9 @@
 import React from 'react';
 import Link from '@components/_shared/Link';
 
-const Index = (): JSX.Element => {
+const Header = (): JSX.Element => {
 	return (
-		<div title="Home" className="row ml-10">
+		<div className="container row">
 			<div className="flex-sc row">
 				<div className="flex-ss col">
 					<h1 className="mt-10 text-4xl font-bold text-center z-10">Thinker</h1>
@@ -30,11 +30,4 @@ const Index = (): JSX.Element => {
 	);
 };
 
-// Above are sample use of
-
-// useLayout: which is a custom hooks in context management
-// Alert: custom popping out alert box that automatically vanish
-// Link: custom link that can be styled into anything and is so comfortable
-// MainLayout: open 'components/_layouts/', that is the place where you put navbar and footer, not here
-
-export default Index;
+export default Header;

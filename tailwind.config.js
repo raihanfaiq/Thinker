@@ -5,7 +5,9 @@ module.exports = {
 			padding: {
 				DEFAULT: '5%',
 				sm: '32px',
+				'2xl': '144px',
 			},
+			center: true,
 		},
 		extend: {
 			colors: {
@@ -16,6 +18,8 @@ module.exports = {
 				warning: '#FFCB11',
 				danger: '#ec4141',
 				success: '#67db8e',
+				sky: '#9ADCFF',
+				whitesky: '#CEE5F8',
 			},
 			fontFamily: {
 				main: 'ProximaNova, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',

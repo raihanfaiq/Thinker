@@ -3,7 +3,8 @@ import useMinHeight from '@core/hooks/useMinHeight';
 import AlertHandler from '@components/_shared/AlertHandler';
 import SEOTags from '@components/_shared/SEOTags';
 import { useLayout } from '@core/contexts/app';
-import Header from './Header';
+import Header from '../_slices/Header';
+import Footer from '@components/_slices/Footer';
 
 interface Props {
 	children: React.ReactNode;
@@ -26,7 +27,7 @@ const MainLayout = ({ children, title, className, style }: Props): JSX.Element =
 				{children}
 			</main>
 
-			<footer ref={lowerRef}>{/* Footer things */}</footer>
+			<footer ref={lowerRef}><Footer /></footer>
 
 			{AlertValue && <AlertHandler key={Date.now()} />}
 		</>
