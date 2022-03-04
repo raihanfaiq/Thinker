@@ -31,6 +31,10 @@ module.exports = {
 				'-md': { raw: '(max-width: 767px)' },
 				'-sm': { raw: '(max-width: 639px)' },
 			},
+			backgroundImage: {
+				'space': 'url(/icon/space.svg)',
+				'ground': 'url(/icon/ground.svg)',
+			}
 		},
 	},
 	plugins: [],
