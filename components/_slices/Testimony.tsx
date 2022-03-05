@@ -11,9 +11,9 @@ const Testimony = (): JSX.Element => {
 					</div>
 					<div className="flex-cc">
 						<div className="h-64 p-5 rounded-2xl text-l border-2 border-black bg-gradient-to-bl from-sky text-justify z-10">
-							"THINKER adalah paket lengkap buat anak SMA dengan harga yang
+							&quot; THINKER adalah paket lengkap buat anak SMA dengan harga yang
 							terjangkau, kita udah bisa milih apa yang kita mau. Pokoknya THINKER
-							keren banget dan sangat bermanfaat. Terima kasih THINKER"
+							keren banget dan sangat bermanfaat. Terima kasih THINKER &quot;
 							<br />
 							<br />
 							Ani (8/10)-Pelajar Kelas 12 SMA Harapan
