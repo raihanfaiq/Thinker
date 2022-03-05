@@ -34,7 +34,23 @@ module.exports = {
 			backgroundImage: {
 				'space': 'url(/icon/space.svg)',
 				'ground': 'url(/icon/ground.svg)',
-			}
+			},
+			animation: {
+				'rocket': 'wiggle 3s linear infinite alternate',
+			},
+			keyframes: {
+				wiggle: {
+					'0%': {
+						transform: 'translateX(-50%)',
+					},
+					'50%': {
+						transform: 'translateX(500%) rotate(90deg)',
+					},
+					'100%': {
+						transform: 'translateX(-50%)',
+					},
+				}
+			},
 		},
 	},
 	plugins: [],

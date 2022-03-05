@@ -1,7 +1,7 @@
 const Testimony = (): JSX.Element => {
 	return (
 		<section className="container mb-4 mt-16 w-full opacity-80 z-30">
-			<div className="bg-whitesky min-h-[450px] rounded-2xl p-10 grid divide-y-[3px] divide-black">
+			<div className="bg-whitesky min-h-[450px] rounded-2xl p-10 grid divide-y-[3px] divide-black shadow-2xl">
 				<h1 className="text-4xl font-bold text-center z-10 mb-4">
 					Yuk Dengarkan Cerita Mereka Bersama THINKER
 				</h1>
