@@ -4,7 +4,7 @@ import Link from '@components/_shared/Link';
 const Footer = (): JSX.Element => {
 	return (
 		<div className="row">
-			<img src="/icon/tree.svg" alt="" className="absolute right-0 -bottom-[1400px] z-10" />
+			<img src="/icon/tree.svg" alt="" className="absolute right-0 -bottom-[205vh] z-10" />
 			<div className="container">
 				<img src="/icon/footer-logo.svg" alt="" className="relative -bottom-24 z-40" />
 			</div>

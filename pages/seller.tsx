@@ -1,9 +1,9 @@
 import React from 'react';
 import MainLayout from '@components/_layouts/MainLayout';
 import Link from '@components/_shared/Link';
-import HeroLanding from '@components/_slices/Buyer/HeroLanding';
-import Category from '@components/_slices/Buyer/Category';
-import Testimony from '@components/_slices/Buyer/Testimony';
+import HeroLanding from '@components/_slices/Seller/HeroLanding';
+import Category from '@components/_slices/Seller/Category';
+import Testimony from '@components/_slices/Seller/Testimony';
 
 const Index = (): JSX.Element => {
 	return (

@@ -11,17 +11,21 @@ const HeroLanding = (): JSX.Element => {
 					<div className="flex-cs col gap-2 p-10">
 						<h1 className="text-xl font-semibold">Halo selamat datang di Thinker!</h1>
 						<h1 className="text-4xl font-bold">
-							Temukan sumber belajar asik sesuai dengan dirimu!
+							Lakukan pekerjaan kalian dengan maksimal!
 						</h1>
 						<h1 className="text-xl">
-							Mulailah mencari materi belajar, kumpulan soal, dan layanan konsultasi dengan harga terjangkau.
+							Pekerjaan yang dilakukan dengan hati tentunya akan sampai ke hati yang lain.
 						</h1>
 						<div className="flex-cc row gap-4 mt-4">
 							<div className="p-2 w-36 rounded-xl border-2 border-black bg-gradient-to-bl from-sky text-justify z-10">
-								<h1 className="text-xl font-bold text-center z-10">daftar</h1>
+								<a href="#">
+									<h1 className="text-xl font-bold text-center z-10">daftar</h1>
+								</a>
 							</div>
 							<div className="p-2 w-36 rounded-xl border-2 border-black bg-gradient-to-bl from-blue text-justify z-10">
-								<h1 className="text-xl font-bold text-center z-10">login</h1>
+								<a href="#">
+									<h1 className="text-xl font-bold text-center z-10">login</h1>
+								</a>
 							</div>
 						</div>
 					</div>
