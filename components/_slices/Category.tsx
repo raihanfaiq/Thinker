@@ -51,9 +51,9 @@ const Category = (): JSX.Element => {
                     </div>
                 </div>
 			</div>
-			</div>
 			<img src='/icon/cloud.png' alt="" className="w-2/5 absolute -bottom-[680px] left-0 opacity-40 -z-10" />
 			<img src='/icon/cloud.png' alt="" className="w-2/5 absolute -bottom-[660px] right-0 opacity-40 -z-10" />
+
 		</section>
 	);
 };
