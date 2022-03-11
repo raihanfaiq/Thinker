@@ -11,12 +11,15 @@
 		"format": "prettier -w ."
 	},
 	"dependencies": {
+		"isomorphic-unfetch": "^3.1.0",
 		"mongoose": "^6.2.4",
 		"next": "^12.0.8",
 		"nextjs-progressbar": "^0.0.13",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
-		"react-icons": "^4.3.1"
+		"react-icons": "^4.3.1",
+		"semantic-ui-css": "^2.4.1",
+		"semantic-ui-react": "^2.1.2"
 	},
 	"devDependencies": {
 		"@next/eslint-plugin-next": "^12.0.8",
