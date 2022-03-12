@@ -20,6 +20,8 @@ const Header = (): JSX.Element => {
 				</Link>
 				<img src="/icon/icon.png" alt="" className="px-4 py-2 h-12" />
 			</div>
+			<img src="/icon/darksky.png" alt="space" className="absolute inset-0 w-full z-10 -top-12" />
+			<img src="/icon/stars.png" alt="space" className="absolute inset-0 w-full z-0 -top-12" />
 		</div>
 	);
 };
