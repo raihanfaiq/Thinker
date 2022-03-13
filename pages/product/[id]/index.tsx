@@ -2,6 +2,7 @@ import fetch from 'isomorphic-unfetch';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { Confirm, Button, Loader } from 'semantic-ui-react';
+import MainLayout from '@components/_layouts/MainLayout';
 
 const Product = ({ product }) => {
 	const [confirm, setConfirm] = useState(false);
@@ -37,18 +38,25 @@ const Product = ({ product }) => {
 	};
 
 	return (
-		<div className="container">
-			{isDeleting ? (
-				<Loader active />
-			) : (
-				<>
-					<h1>{product.name}</h1>
-					<p>{product.description}</p>
-					<Button color="red" onClick={open}>
-						Delete
-					</Button>
-				</>
-			)}
+		<div className="bg-sky">
+			<MainLayout title="New Product">
+				<section className="container">
+					<div className="flex flex-cc col">
+						{isDeleting ? (
+							<Loader active inline="centered" size='massive'>Loading</Loader>
+						) : (
+							<div className="z-20 w-1/2 bg-gradient-to-bl from-sky shadow-2xl p-10 rounded-2xl mt-10">
+								<h1 className="text-4xl z-20 mt-10 flex-cc">{product.name}</h1>
+								<p className="flex-cs">{product.price}</p>								
+								<p className="flex-cc my-10 mb-10">{product.description}</p>
+								<Button color="red" onClick={open}>
+									Delete
+								</Button>
+							</div>
+						)}
+					</div>
+				</section>
+			</MainLayout>
 			<Confirm open={confirm} onCancel={close} onConfirm={handleDelete} />
 		</div>
 	);

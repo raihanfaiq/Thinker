@@ -4,17 +4,19 @@ import fetch from 'isomorphic-unfetch';
 import { Button, Form, Loader } from 'semantic-ui-react';
 import { useRouter } from 'next/router';
 import { ProductType } from '../../@types/product';
-import ProductLayout from '@components/_layouts/ProductLayout';
+import MainLayout from '@components/_layouts/MainLayout';
 
 const NewProduct = () => {
-	const [form, setForm] = useState({ name: '', description: '', category: '', price: '' });
+	const [form, setForm] = useState({ name: '', description: '', category: '', price: 0 });
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [errors, setErrors] = useState<ProductType>({ name: '', description: '', category: '', price: '' });
+	const [errors, setErrors] = useState<ProductType>({ name: '', description: '', category: '', price: 0 });
 	const router = useRouter();
 
 	useEffect(() => {
 		if (isSubmitting) {
+			console.log('errors', errors);
 			if (Object.keys(errors).length === 0) {
+				console.log(form);
 				createProduct();
 			} else {
 				setIsSubmitting(false);
@@ -22,7 +24,6 @@ const NewProduct = () => {
 		}
 	}, [errors]);
 
-	console.log(form);
 	const createProduct = async () => {
 		try {
 			const res = await fetch('http://localhost:3000/api/products', {
@@ -61,12 +62,7 @@ const NewProduct = () => {
 	};
 
 	const validate = () => {
-		const err: ProductType = {
-			name: '',
-			description: '',
-			category: '',
-			price: 0
-		};
+		const err: ProductType = {};
 
 		if (!form.name) {
 			err.name = 'Name is required';
@@ -83,14 +79,14 @@ const NewProduct = () => {
 
 	return (
 		<div className="bg-sky">
-			<ProductLayout title="New Product">
+			<MainLayout title="New Product">
 				<section className="container">
 					<div className="flex flex-cc col">
-						<h1 className="text-white text-4xl z-20 my-10">Create Product</h1>
 						{isSubmitting ? (
-							<Loader active inline="centered" />
+							<Loader active inline="centered" size='massive'>Loading</Loader>
 						) : (
-							<div className="z-10 w-1/2 bg-gradient-to-bl from-sky shadow-2xl p-10 rounded-2xl">
+							<div className="z-20 w-1/2 bg-gradient-to-bl from-sky shadow-2xl p-10 rounded-2xl mt-10">
+								<h1 className="text-4xl z-20 my-10 flex-cc">Create Product</h1>
 								<Form onSubmit={handleSubmit}>
 									<h3>Name</h3>
 									<Form.Input
@@ -102,6 +98,7 @@ const NewProduct = () => {
 										}
 										placeholder="Name"
 										name="name"
+										value={form.name}
 										onChange={handleChange}									
 									/>
 									<h3>Description</h3>
@@ -114,6 +111,7 @@ const NewProduct = () => {
 												? { content: 'Please enter a description', pointing: 'below' }
 												: null
 										}
+										value={form.description}
 										onChange={handleChange}
 									/>
 									<h3>Category</h3>
@@ -121,19 +119,19 @@ const NewProduct = () => {
 										label="PDF"
 										name="pdf"
 										value={form.category}
-										onChange={(e) => handleChangeCategory('pdf')}
+										onChange={(e) => handleChangeCategory('PDF')}
 									/>
 									<Form.Radio
 										label="Buku"
 										name="buku"
 										value={form.category}
-										onChange={(e) => handleChangeCategory('buku')}
+										onChange={(e) => handleChangeCategory('Buku')}
 									/>
 									<Form.Radio
 										label="Video"
 										name="video"
 										value={form.category}
-										onChange={(e) => handleChangeCategory('video')}
+										onChange={(e) => handleChangeCategory('Video')}
 									/>
 									<h3>Price</h3>
 									<Form.Input
@@ -155,7 +153,7 @@ const NewProduct = () => {
 						)}
 					</div>
 				</section>
-			</ProductLayout>
+			</MainLayout>
 		</div>
 	);
 };

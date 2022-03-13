@@ -12,7 +12,7 @@ const Header = (): JSX.Element => {
 				<Link href="/about" className="px-4 py-2 text-white text-xl hover:bg-opacity-80">
 					Home
 				</Link>
-				<Link href="/form" className="px-4 py-2 text-white text-xl hover:bg-opacity-80">
+				<Link href="/product" className="px-4 py-2 text-white text-xl hover:bg-opacity-80">
 					Product
 				</Link>
 				<Link href="/about" className="px-4 py-2 text-white text-xl hover:bg-opacity-80">
@@ -20,8 +20,8 @@ const Header = (): JSX.Element => {
 				</Link>
 				<img src="/icon/icon.png" alt="" className="px-4 py-2 h-12" />
 			</div>
-			<img src="/icon/darksky.png" alt="space" className="absolute inset-0 w-full z-10 -top-12" />
-			<img src="/icon/stars.png" alt="space" className="absolute inset-0 w-full z-0 -top-12" />
+			<img src="/icon/darksky.png" alt="space" className="absolute inset-0 w-full z-20 -top-12" />
+			<img src="/icon/stars.png" alt="space" className="absolute inset-0 w-full z-10 -top-12" />
 		</div>
 	);
 };

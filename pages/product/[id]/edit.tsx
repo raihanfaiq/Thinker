@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Button, Form, Loader } from 'semantic-ui-react';
 import { useRouter } from 'next/router';
+import MainLayout from '@components/_layouts/MainLayout';
+import { ProductType } from '../../../@types/product';
 
 const EditProduct = ({ product }) => {
 	const [form, setForm] = useState({
@@ -12,7 +14,7 @@ const EditProduct = ({ product }) => {
 		price: product.price,
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [errors, setErrors] = useState({});
+	const [errors, setErrors] = useState<ProductType>({});
 	const router = useRouter();
 
 	useEffect(() => {
@@ -43,7 +45,7 @@ const EditProduct = ({ product }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		let errs = validate();
+		const errs = validate();
 		setErrors(errs);
 		setIsSubmitting(true);
 	};
@@ -55,8 +57,15 @@ const EditProduct = ({ product }) => {
 		});
 	};
 
+	const handleChangeCategory = (category: string) => {
+		setForm({
+			...form,
+			category: category,
+		});
+	};
+
 	const validate = () => {
-		let err = {};
+		const err: ProductType = {};
 
 		if (!form.name) {
 			err.name = 'Name is required';
@@ -69,62 +78,82 @@ const EditProduct = ({ product }) => {
 	};
 
 	return (
-		<div className="form-container">
-			<h1>Update Product</h1>
-			<div>
-				{isSubmitting ? (
-					<Loader active inline="centered" />
-				) : (
-					<Form onSubmit={handleSubmit}>
-						<Form.Input
-							fluid
-							error={
-								errors.name
-									? { content: 'Please enter a name', pointing: 'below' }
-									: null
-							}
-							label="Name"
-							placeholder="Name"
-							name="name"
-							value={form.name}
-							onChange={handleChange}
-						/>
-						<Form.TextArea
-							fluid
-							label="Descriprtion"
-							placeholder="Description"
-							name="description"
-							error={
-								errors.description
-									? { content: 'Please enter a description', pointing: 'below' }
-									: null
-							}
-							value={form.description}
-							onChange={handleChange}
-						/>
-						<Form.Input
-							label="Category"
-							placeholder="Category"
-							name="category"
-							value={form.category}
-							onChange={handleChange}
-						/>
-						<Form.Input
-							error={
-								errors.price
-									? { content: 'Please enter a price', pointing: 'below' }
-									: null
-							}
-							label="Price"
-							placeholder="Price"
-							name="price"
-							value={form.price}
-							onChange={handleChange}
-						/>
-						<Button type="submit">Update</Button>
-					</Form>
-				)}
-			</div>
+		<div className="bg-sky">
+			<MainLayout title="New Product">
+				<section className="container">
+					<div className="flex flex-cc col">
+						{isSubmitting ? (
+							<Loader active inline="centered" size='massive'>Loading</Loader>
+						) : (
+							<div className="z-20 w-1/2 bg-gradient-to-bl from-sky shadow-2xl p-10 rounded-2xl mt-10">
+								<h1 className="text-4xl z-20 my-10 flex-cc">Update Product</h1>
+								<Form onSubmit={handleSubmit}>
+									<h3>Name</h3>
+									<Form.Input
+										fluid
+										error={
+											errors.name
+												? { content: 'Please enter a name', pointing: 'below' }
+												: null
+										}
+										placeholder="Name"
+										name="name"
+										value={form.name}
+										onChange={handleChange}									
+									/>
+									<h3>Description</h3>
+									<Form.TextArea
+										fluid
+										placeholder="Description"
+										name="description"
+										error={
+											errors.description
+												? { content: 'Please enter a description', pointing: 'below' }
+												: null
+										}
+										value={form.description}
+										onChange={handleChange}
+									/>
+									<h3>Category</h3>
+									<Form.Radio
+										label="PDF"
+										name="pdf"
+										checked={form.category === 'PDF'}
+										onChange={(e) => handleChangeCategory('PDF')}
+									/>
+									<Form.Radio
+										label="Buku"
+										name="buku"
+										checked={form.category === 'Buku'}
+										onChange={(e) => handleChangeCategory('Buku')}
+									/>
+									<Form.Radio
+										label="Video"
+										name="video"
+										checked={form.category === 'Video'}
+										onChange={(e) => handleChangeCategory('Video')}
+									/>
+									<h3>Price</h3>
+									<Form.Input
+										error={
+											errors.price
+												? { content: 'Please enter a price', pointing: 'below' }
+												: null
+										}
+										placeholder="Price"
+										name="price"
+										value={form.price}
+										onChange={handleChange}
+									/>
+									<div className="">
+										<Button basic color="blue" type="submit">Update</Button>
+									</div>
+								</Form>
+							</div>
+						)}
+					</div>
+				</section>
+			</MainLayout>
 		</div>
 	);
 };
