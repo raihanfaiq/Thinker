@@ -27,16 +27,21 @@ const EditProduct = ({ product }) => {
 		}
 	}, [errors]);
 
+	// https://thinker-id.vercel.app
+	// http://localhost:3000
 	const updateProduct = async () => {
 		try {
-			const res = await fetch(`http://localhost:3000/api/products/${router.query.id}`, {
-				method: 'PUT',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(form),
-			});
+			const res = await fetch(
+				`https://thinker-id.vercel.app/api/products/${router.query.id}`,
+				{
+					method: 'PUT',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(form),
+				}
+			);
 			router.push('/product/');
 		} catch (error) {
 			console.log(error);
@@ -83,7 +88,9 @@ const EditProduct = ({ product }) => {
 				<section className="container">
 					<div className="flex flex-cc col">
 						{isSubmitting ? (
-							<Loader active inline="centered" size='massive'>Loading</Loader>
+							<Loader active inline="centered" size="massive">
+								Loading
+							</Loader>
 						) : (
 							<div className="z-20 w-1/2 bg-gradient-to-bl from-sky shadow-2xl p-10 rounded-2xl mt-10">
 								<h1 className="text-4xl z-20 my-10 flex-cc">Update Product</h1>
@@ -93,13 +100,16 @@ const EditProduct = ({ product }) => {
 										fluid
 										error={
 											errors.name
-												? { content: 'Please enter a name', pointing: 'below' }
+												? {
+														content: 'Please enter a name',
+														pointing: 'below',
+												  }
 												: null
 										}
 										placeholder="Name"
 										name="name"
 										value={form.name}
-										onChange={handleChange}									
+										onChange={handleChange}
 									/>
 									<h3>Description</h3>
 									<Form.TextArea
@@ -108,7 +118,10 @@ const EditProduct = ({ product }) => {
 										name="description"
 										error={
 											errors.description
-												? { content: 'Please enter a description', pointing: 'below' }
+												? {
+														content: 'Please enter a description',
+														pointing: 'below',
+												  }
 												: null
 										}
 										value={form.description}
@@ -137,7 +150,10 @@ const EditProduct = ({ product }) => {
 									<Form.Input
 										error={
 											errors.price
-												? { content: 'Please enter a price', pointing: 'below' }
+												? {
+														content: 'Please enter a price',
+														pointing: 'below',
+												  }
 												: null
 										}
 										placeholder="Price"
@@ -146,7 +162,9 @@ const EditProduct = ({ product }) => {
 										onChange={handleChange}
 									/>
 									<div className="">
-										<Button basic color="blue" type="submit">Update</Button>
+										<Button basic color="blue" type="submit">
+											Update
+										</Button>
 									</div>
 								</Form>
 							</div>
@@ -159,7 +177,7 @@ const EditProduct = ({ product }) => {
 };
 
 EditProduct.getInitialProps = async ({ query: { id } }) => {
-	const res = await fetch(`http://localhost:3000/api/products/${id}`);
+	const res = await fetch(`https://thinker-id.vercel.app/api/products/${id}`);
 	const { data } = await res.json();
 
 	return { product: data };
