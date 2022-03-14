@@ -9,7 +9,12 @@ import MainLayout from '@components/_layouts/MainLayout';
 const NewProduct = () => {
 	const [form, setForm] = useState({ name: '', description: '', category: '', price: 0 });
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [errors, setErrors] = useState<ProductType>({ name: '', description: '', category: '', price: 0 });
+	const [errors, setErrors] = useState<ProductType>({
+		name: '',
+		description: '',
+		category: '',
+		price: 0,
+	});
 	const router = useRouter();
 
 	useEffect(() => {
@@ -26,7 +31,7 @@ const NewProduct = () => {
 
 	const createProduct = async () => {
 		try {
-			const res = await fetch('http://localhost:3000/api/products', {
+			const res = await fetch('https://thinker-id.vercel.app/api/products', {
 				method: 'POST',
 				headers: {
 					Accept: 'application/json',
@@ -83,7 +88,9 @@ const NewProduct = () => {
 				<section className="container">
 					<div className="flex flex-cc col">
 						{isSubmitting ? (
-							<Loader active inline="centered" size='massive'>Loading</Loader>
+							<Loader active inline="centered" size="massive">
+								Loading
+							</Loader>
 						) : (
 							<div className="z-20 w-1/2 bg-gradient-to-bl from-sky shadow-2xl p-10 rounded-2xl mt-10">
 								<h1 className="text-4xl z-20 my-10 flex-cc">Create Product</h1>
@@ -93,13 +100,16 @@ const NewProduct = () => {
 										fluid
 										error={
 											errors.name
-												? { content: 'Please enter a name', pointing: 'below' }
+												? {
+														content: 'Please enter a name',
+														pointing: 'below',
+												  }
 												: null
 										}
 										placeholder="Name"
 										name="name"
 										value={form.name}
-										onChange={handleChange}									
+										onChange={handleChange}
 									/>
 									<h3>Description</h3>
 									<Form.TextArea
@@ -108,7 +118,10 @@ const NewProduct = () => {
 										name="description"
 										error={
 											errors.description
-												? { content: 'Please enter a description', pointing: 'below' }
+												? {
+														content: 'Please enter a description',
+														pointing: 'below',
+												  }
 												: null
 										}
 										value={form.description}
@@ -137,7 +150,10 @@ const NewProduct = () => {
 									<Form.Input
 										error={
 											errors.price
-												? { content: 'Please enter a price', pointing: 'below' }
+												? {
+														content: 'Please enter a price',
+														pointing: 'below',
+												  }
 												: null
 										}
 										placeholder="Price"
@@ -146,7 +162,9 @@ const NewProduct = () => {
 										onChange={handleChange}
 									/>
 									<div className="">
-										<Button basic color="blue" type="submit">Create</Button>
+										<Button basic color="blue" type="submit">
+											Create
+										</Button>
 									</div>
 								</Form>
 							</div>
