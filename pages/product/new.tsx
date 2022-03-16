@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
@@ -101,8 +102,8 @@ const NewProduct = () => {
 										error={
 											errors.name
 												? {
-														content: 'Please enter a name',
-														pointing: 'below',
+													content: 'Please enter a name',
+													pointing: 'below',
 												  }
 												: null
 										}
@@ -119,8 +120,8 @@ const NewProduct = () => {
 										error={
 											errors.description
 												? {
-														content: 'Please enter a description',
-														pointing: 'below',
+													content: 'Please enter a description',
+													pointing: 'below',
 												  }
 												: null
 										}
@@ -151,8 +152,8 @@ const NewProduct = () => {
 										error={
 											errors.price
 												? {
-														content: 'Please enter a price',
-														pointing: 'below',
+													content: 'Please enter a price',
+													pointing: 'below',
 												  }
 												: null
 										}
