@@ -3,7 +3,7 @@ import useMinHeight from '@core/hooks/useMinHeight';
 import AlertHandler from '@components/_shared/AlertHandler';
 import SEOTags from '@components/_shared/SEOTags';
 import { useLayout } from '@core/contexts/app';
-import Header from '../_slices/Header';
+import header from './header';
 import Footer from '@components/_slices/Footer';
 
 interface Props {
@@ -21,7 +21,7 @@ const MainLayout = ({ children, title, className, style }: Props): JSX.Element =
 		<>
 			<SEOTags title={title} />
 
-			<header ref={upperRef}><Header /></header>
+			<header ref={upperRef}><header /></header>
 
 			<main style={{ minHeight, ...style }} className={className}>
 				{children}

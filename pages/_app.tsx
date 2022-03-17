@@ -1,4 +1,5 @@
 import React from 'react';
+import { SessionProvider } from 'next-auth/react';
 import Head from 'next/head';
 import { AppProps } from 'next/app';
 import ProgressBar from 'nextjs-progressbar';
@@ -9,7 +10,7 @@ import '@core/styles/typefaces.css';
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 	return (
-		<>
+		<SessionProvider session={pageProps.session} refetchInterval={0}>
 			<Head>
 				<link rel="icon" href="/favicon.ico" />
 				<meta name="theme-color" content="#000000" />
@@ -24,7 +25,7 @@ const App = ({ Component, pageProps }: AppProps): JSX.Element => {
 			<ContextProvider>
 				<Component {...pageProps} />
 			</ContextProvider>
-		</>
+		</SessionProvider>
 	);
 };
 
