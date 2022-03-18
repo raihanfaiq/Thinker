@@ -25,15 +25,15 @@ export default function Header() {
 				<noscript>
 					<style>{'.nojs-show { opacity: 1; top: 0; }'}</style>
 				</noscript>
-				<div className="mt-4 flex-cc z-40 ml-44">
+				<div className="mt-4 flex-cc z-40 ml-52">
 					<Link
-						href="/about"
+						href="/"
 						className="px-4 py-2 text-white text-xl hover:bg-opacity-80"
 					>
 						Home
 					</Link>
 					<Link
-						href="/product"
+						href={!session ? '/product' : '/admin/product'}
 						className="px-4 py-2 text-white text-xl hover:bg-opacity-80"
 					>
 						Product
@@ -44,8 +44,8 @@ export default function Header() {
 					>
 						Tentang Kami
 					</Link>
-					<img src="/icon/icongaris3.png" alt="" className="px-4 py-2 h-12" />
-					<img src="/icon/iconnotif.png" alt="" className="px-4 py-2 h-12" />
+					<img src="/icon/icongaris3.png" alt="" className="px-4 py-2 h-9" />
+					<img src="/icon/iconnotif.png" alt="" className="px-4 py-2 h-9" />
 					<p
 						className={`nojs-show ${
 							!session && loading ? styles.loading : styles.loaded
@@ -61,7 +61,7 @@ export default function Header() {
 									className={styles.buttonPrimary}
 									onClick={(e) => {
 										e.preventDefault();
-										signIn();
+										signIn('auth0');
 									}}
 								>
 									Sign in
@@ -76,11 +76,11 @@ export default function Header() {
 										className={styles.avatar}
 									/>
 								)}
-								<span className={styles.signedInText}>
+								{/* <span className={styles.signedInText}>
 									<small>Signed in as</small>
 									<br />
 									<strong>{session.user.email ?? session.user.name}</strong>
-								</span>
+								</span> */}
 								<a
 									href={'/api/auth/signout'}
 									className={styles.button}

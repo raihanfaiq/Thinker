@@ -4,46 +4,43 @@ import { useState, useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Button, Form, Loader } from 'semantic-ui-react';
 import { useRouter } from 'next/router';
-import MainLayout from '@components/_layouts/MainLayout';
 import { ProductType } from '../../../@types/product';
+import MainLayout from '@components/_layouts/MainLayout';
 
-const EditProduct = ({ product }) => {
-	const [form, setForm] = useState({
-		name: product.name,
-		description: product.description,
-		category: product.category,
-		price: product.price,
-	});
+const NewProduct = () => {
+	const [form, setForm] = useState({ name: '', description: '', category: '', price: 0 });
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [errors, setErrors] = useState<ProductType>({});
+	const [errors, setErrors] = useState<ProductType>({
+		name: '',
+		description: '',
+		category: '',
+		price: 0,
+	});
 	const router = useRouter();
 
 	useEffect(() => {
 		if (isSubmitting) {
+			console.log('errors', errors);
 			if (Object.keys(errors).length === 0) {
-				updateProduct();
+				console.log(form);
+				createProduct();
 			} else {
 				setIsSubmitting(false);
 			}
 		}
 	}, [errors]);
 
-	// https://thinker-id.vercel.app
-	// http://localhost:3000
-	const updateProduct = async () => {
+	const createProduct = async () => {
 		try {
-			const res = await fetch(
-				`https://thinker-id.vercel.app/api/products/${router.query.id}`,
-				{
-					method: 'PUT',
-					headers: {
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(form),
-				}
-			);
-			router.push('/product/');
+			const res = await fetch('http://localhost:3000/api/products', {
+				method: 'POST',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(form),
+			});
+			router.push('/product');
 		} catch (error) {
 			console.log(error);
 		}
@@ -79,6 +76,9 @@ const EditProduct = ({ product }) => {
 		if (!form.description) {
 			err.description = 'Description is required';
 		}
+		if (!form.price) {
+			err.price = 'Price is required';
+		}
 
 		return err;
 	};
@@ -94,7 +94,7 @@ const EditProduct = ({ product }) => {
 							</Loader>
 						) : (
 							<div className="z-20 w-1/2 bg-gradient-to-bl from-sky shadow-2xl p-10 rounded-2xl mt-10">
-								<h1 className="text-4xl z-20 my-10 flex-cc">Update Product</h1>
+								<h1 className="text-4xl z-20 my-10 flex-cc">Create Product</h1>
 								<Form onSubmit={handleSubmit}>
 									<h3>Name</h3>
 									<Form.Input
@@ -132,19 +132,19 @@ const EditProduct = ({ product }) => {
 									<Form.Radio
 										label="PDF"
 										name="pdf"
-										checked={form.category === 'PDF'}
+										value={form.category}
 										onChange={(e) => handleChangeCategory('PDF')}
 									/>
 									<Form.Radio
 										label="Buku"
 										name="buku"
-										checked={form.category === 'Buku'}
+										value={form.category}
 										onChange={(e) => handleChangeCategory('Buku')}
 									/>
 									<Form.Radio
 										label="Video"
 										name="video"
-										checked={form.category === 'Video'}
+										value={form.category}
 										onChange={(e) => handleChangeCategory('Video')}
 									/>
 									<h3>Price</h3>
@@ -164,7 +164,7 @@ const EditProduct = ({ product }) => {
 									/>
 									<div className="">
 										<Button basic color="blue" type="submit">
-											Update
+											Create
 										</Button>
 									</div>
 								</Form>
@@ -177,11 +177,4 @@ const EditProduct = ({ product }) => {
 	);
 };
 
-EditProduct.getInitialProps = async ({ query: { id } }) => {
-	const res = await fetch(`https://thinker-id.vercel.app/api/products/${id}`);
-	const { data } = await res.json();
-
-	return { product: data };
-};
-
-export default EditProduct;
+export default NewProduct;

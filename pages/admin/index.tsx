@@ -1,17 +1,22 @@
-import Layout from '../../components/_layouts/layout';
+import React from 'react';
+import MainLayout from '@components/_layouts/MainLayout';
+import Link from '@components/_shared/Link';
+import HeroLanding from '@components/_slices/Seller/HeroLanding';
+import Category from '@components/_slices/Seller/Category';
+import Testimony from '@components/_slices/Seller/Testimony';
 
-export default function Page() {
+const Index = (): JSX.Element => {
 	return (
-		<Layout>
-			<h1>This page is protected by Middleware</h1>
-			<p>Only admin users can see this page.</p>
-			<p>
-        To learn more about the NextAuth middleware see&nbsp;
-				<a href="https://docs-git-misc-docs-nextauthjs.vercel.app/configuration/nextjs#middleware">
-          the docs
-				</a>
-        .
-			</p>
-		</Layout>
+		<div className="bg-sky">
+			<MainLayout title="Home" className="flex-sc col ">
+				<img src="/icon/darksky.png" alt="space" className="absolute inset-0 w-full z-20 -top-12" />
+				<img src="/icon/stars.png" alt="space" className="absolute inset-0 w-full z-10 -top-12" />
+				<HeroLanding />
+				<Category />
+				<Testimony />
+			</MainLayout>
+		</div>
 	);
-}
+};
+
+export default Index;

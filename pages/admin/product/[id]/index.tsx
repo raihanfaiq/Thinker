@@ -22,7 +22,7 @@ const Product = ({ product }) => {
 	const deleteProduct = async () => {
 		const productId = router.query.id;
 		try {
-			const deleted = await fetch(`https://thinker-id.vercel.app/api/products/${productId}`, {
+			const deleted = await fetch(`http://localhost:3000/api/products/${productId}`, {
 				method: 'Delete',
 			});
 
@@ -65,7 +65,7 @@ const Product = ({ product }) => {
 };
 
 Product.getInitialProps = async ({ query: { id } }) => {
-	const res = await fetch(`https://thinker-id.vercel.app/api/products/${id}`);
+	const res = await fetch(`http://localhost:3000/api/products/${id}`);
 	const { data } = await res.json();
 
 	return { product: data };

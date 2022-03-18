@@ -4,43 +4,46 @@ import { useState, useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Button, Form, Loader } from 'semantic-ui-react';
 import { useRouter } from 'next/router';
-import { ProductType } from '../../@types/product';
 import MainLayout from '@components/_layouts/MainLayout';
+import { ProductType } from '../../../../@types/product';
 
-const NewProduct = () => {
-	const [form, setForm] = useState({ name: '', description: '', category: '', price: 0 });
-	const [isSubmitting, setIsSubmitting] = useState(false);
-	const [errors, setErrors] = useState<ProductType>({
-		name: '',
-		description: '',
-		category: '',
-		price: 0,
+const EditProduct = ({ product }) => {
+	const [form, setForm] = useState({
+		name: product.name,
+		description: product.description,
+		category: product.category,
+		price: product.price,
 	});
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [errors, setErrors] = useState<ProductType>({});
 	const router = useRouter();
 
 	useEffect(() => {
 		if (isSubmitting) {
-			console.log('errors', errors);
 			if (Object.keys(errors).length === 0) {
-				console.log(form);
-				createProduct();
+				updateProduct();
 			} else {
 				setIsSubmitting(false);
 			}
 		}
 	}, [errors]);
 
-	const createProduct = async () => {
+	// http://localhost:3000
+	// http://localhost:3000
+	const updateProduct = async () => {
 		try {
-			const res = await fetch('https://thinker-id.vercel.app/api/products', {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(form),
-			});
-			router.push('/product');
+			const res = await fetch(
+				`http://localhost:3000/api/products/${router.query.id}`,
+				{
+					method: 'PUT',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(form),
+				}
+			);
+			router.push('/product/');
 		} catch (error) {
 			console.log(error);
 		}
@@ -76,9 +79,6 @@ const NewProduct = () => {
 		if (!form.description) {
 			err.description = 'Description is required';
 		}
-		if (!form.price) {
-			err.price = 'Price is required';
-		}
 
 		return err;
 	};
@@ -94,7 +94,7 @@ const NewProduct = () => {
 							</Loader>
 						) : (
 							<div className="z-20 w-1/2 bg-gradient-to-bl from-sky shadow-2xl p-10 rounded-2xl mt-10">
-								<h1 className="text-4xl z-20 my-10 flex-cc">Create Product</h1>
+								<h1 className="text-4xl z-20 my-10 flex-cc">Update Product</h1>
 								<Form onSubmit={handleSubmit}>
 									<h3>Name</h3>
 									<Form.Input
@@ -132,19 +132,19 @@ const NewProduct = () => {
 									<Form.Radio
 										label="PDF"
 										name="pdf"
-										value={form.category}
+										checked={form.category === 'PDF'}
 										onChange={(e) => handleChangeCategory('PDF')}
 									/>
 									<Form.Radio
 										label="Buku"
 										name="buku"
-										value={form.category}
+										checked={form.category === 'Buku'}
 										onChange={(e) => handleChangeCategory('Buku')}
 									/>
 									<Form.Radio
 										label="Video"
 										name="video"
-										value={form.category}
+										checked={form.category === 'Video'}
 										onChange={(e) => handleChangeCategory('Video')}
 									/>
 									<h3>Price</h3>
@@ -164,7 +164,7 @@ const NewProduct = () => {
 									/>
 									<div className="">
 										<Button basic color="blue" type="submit">
-											Create
+											Update
 										</Button>
 									</div>
 								</Form>
@@ -177,4 +177,11 @@ const NewProduct = () => {
 	);
 };
 
-export default NewProduct;
+EditProduct.getInitialProps = async ({ query: { id } }) => {
+	const res = await fetch(`http://localhost:3000/api/products/${id}`);
+	const { data } = await res.json();
+
+	return { product: data };
+};
+
+export default EditProduct;

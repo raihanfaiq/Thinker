@@ -14,7 +14,6 @@
   border-radius: 0 0 0.6rem 0.6rem;
   padding: 0.6rem 1rem;
   margin: 0;
-  background-color: rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease-in;
 }
 
@@ -65,7 +64,7 @@
   position: relative;
   z-index: 10;
   background-color: transparent;
-  color: #555;
+  color: white;
 }
 
 .buttonPrimary {

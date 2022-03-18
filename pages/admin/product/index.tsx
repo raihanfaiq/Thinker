@@ -27,14 +27,26 @@ const Index = ({ products }) => {
 												</Card.Header>
 											</Card.Content>
 											<Card.Content extra>
-												<Link href={`/product/${product._id}`}>
+												<Link href={`/admin/product/${product._id}`}>
 													<Button primary>View</Button>
+												</Link>
+												<Link href={`/admin/product/${product._id}/edit`}>
+													<Button primary>Edit</Button>
 												</Link>
 											</Card.Content>
 										</Card>
 									</div>
 								);
 							})}
+						</div>
+						<div className="flex-cc row gap-4 mt-4">
+							<div className="p-2 w-36 mt-10 rounded-xl text-white bg-gradient-to-bl from-sky text-justify z-10">
+								<a href="product/new">
+									<h1 className="text-xl font-bold text-center z-10">
+										Buat Produk
+									</h1>
+								</a>
+							</div>
 						</div>
 					</div>
 				</section>
