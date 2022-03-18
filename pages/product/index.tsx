@@ -2,7 +2,6 @@ import Link from 'next/link';
 import 'semantic-ui-css/semantic.min.css';
 import fetch from 'isomorphic-unfetch';
 import { Button, Card } from 'semantic-ui-react';
-import Layout from '../../components/_layouts/ProductLayout';
 import MainLayout from '@components/_layouts/MainLayout';
 
 const Index = ({ products }) => {
@@ -43,7 +42,9 @@ const Index = ({ products }) => {
 						<div className="flex-cc row gap-4 mt-4">
 							<div className="p-2 w-36 mt-10 rounded-xl text-white bg-gradient-to-bl from-sky text-justify z-10">
 								<a href="product/new">
-									<h1 className="text-xl font-bold text-center z-10">Buat Produk</h1>
+									<h1 className="text-xl font-bold text-center z-10">
+										Buat Produk
+									</h1>
 								</a>
 							</div>
 						</div>
