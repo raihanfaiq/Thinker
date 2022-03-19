@@ -26,10 +26,7 @@ export default function Header() {
 					<style>{'.nojs-show { opacity: 1; top: 0; }'}</style>
 				</noscript>
 				<div className="mt-4 flex-cc z-40 ml-52">
-					<Link
-						href="/"
-						className="px-4 py-2 text-white text-xl hover:bg-opacity-80"
-					>
+					<Link href="/" className="px-4 py-2 text-white text-xl hover:bg-opacity-80">
 						Home
 					</Link>
 					<Link
