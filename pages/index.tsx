@@ -7,12 +7,10 @@ const Index = (): JSX.Element => {
 	const { data: session } = useSession();
 	return (
 		<div>
-			{!session && (
-				<Buyer />
-			)}
-			{session?.user && (
-				<Admin />
-			)}
+			{!session && <Buyer />}
+			{session?.user && session?.user.name === 'quenttok' && <Admin />}
+			{session?.user && session?.user.name !== 'quenttok' && <Buyer />}
+			{session?.user && console.log(session.user)}
 		</div>
 	);
 };
