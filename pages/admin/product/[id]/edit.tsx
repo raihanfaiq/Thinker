@@ -32,18 +32,15 @@ const EditProduct = ({ product }) => {
 	// http://localhost:3000
 	const updateProduct = async () => {
 		try {
-			const res = await fetch(
-				`http://localhost:3000/api/products/${router.query.id}`,
-				{
-					method: 'PUT',
-					headers: {
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify(form),
-				}
-			);
-			router.push('/product/');
+			const res = await fetch(`http://localhost:3000/api/products/${router.query.id}`, {
+				method: 'PUT',
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(form),
+			});
+			router.push('/admin/product');
 		} catch (error) {
 			console.log(error);
 		}
@@ -102,8 +99,8 @@ const EditProduct = ({ product }) => {
 										error={
 											errors.name
 												? {
-													content: 'Please enter a name',
-													pointing: 'below',
+														content: 'Please enter a name',
+														pointing: 'below',
 												  }
 												: null
 										}
@@ -120,8 +117,8 @@ const EditProduct = ({ product }) => {
 										error={
 											errors.description
 												? {
-													content: 'Please enter a description',
-													pointing: 'below',
+														content: 'Please enter a description',
+														pointing: 'below',
 												  }
 												: null
 										}
@@ -152,8 +149,8 @@ const EditProduct = ({ product }) => {
 										error={
 											errors.price
 												? {
-													content: 'Please enter a price',
-													pointing: 'below',
+														content: 'Please enter a price',
+														pointing: 'below',
 												  }
 												: null
 										}

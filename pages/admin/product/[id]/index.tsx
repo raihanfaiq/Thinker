@@ -26,7 +26,7 @@ const Product = ({ product }) => {
 				method: 'Delete',
 			});
 
-			router.push('/product');
+			router.push('/admin/product');
 		} catch (error) {
 			console.log(error);
 		}
