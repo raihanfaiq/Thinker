@@ -49,8 +49,9 @@ const Product = ({ product }) => {
 						) : (
 							<div className="z-20 w-1/2 bg-gradient-to-bl from-sky shadow-2xl p-10 rounded-2xl mt-10">
 								<h1 className="text-4xl z-20 mt-10 flex-cc">{product.name}</h1>
-								<p className="flex-ss">{product.price}</p>
 								<p className="flex-cc my-10 mb-10">{product.description}</p>
+								<p className="flex-ss">{product.kelas}</p>
+								<p className="flex-ss">{product.price}</p>
 								<p className="flex-ss">{product.kelas}</p>
 								<p className="flex-ss">{product.kodeJenis}</p>
 								<p className="flex-ss">{product.kodeMateri}</p>
@@ -59,9 +60,6 @@ const Product = ({ product }) => {
 								{/* <p className="flex-ss">{product.rating}</p> */}
 								<p className="flex-ss">{product.stok}</p>
 								{/* <p className="flex-ss">{product.diskon}</p> */}
-								<Button color="red" onClick={open}>
-									Delete
-								</Button>
 							</div>
 						)}
 					</div>

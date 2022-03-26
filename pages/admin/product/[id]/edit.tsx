@@ -127,22 +127,16 @@ const EditProduct = ({ product }) => {
 									/>
 									<h3>Category</h3>
 									<Form.Radio
-										label="PDF"
-										name="pdf"
-										checked={form.category === 'PDF'}
-										onChange={(e) => handleChangeCategory('PDF')}
+										label="Softcopy"
+										name="softcopy"
+										checked={form.category === 'Softcopy'}
+										onChange={(e) => handleChangeCategory('Softcopy')}
 									/>
 									<Form.Radio
-										label="Buku"
-										name="buku"
-										checked={form.category === 'Buku'}
-										onChange={(e) => handleChangeCategory('Buku')}
-									/>
-									<Form.Radio
-										label="Video"
-										name="video"
-										checked={form.category === 'Video'}
-										onChange={(e) => handleChangeCategory('Video')}
+										label="Hardcopy"
+										name="hardcopy"
+										checked={form.category === 'Hardcopy'}
+										onChange={(e) => handleChangeCategory('Hardcopy')}
 									/>
 									<h3>Price</h3>
 									<Form.Input

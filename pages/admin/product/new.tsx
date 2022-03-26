@@ -8,13 +8,36 @@ import { ProductType } from '../../../@types/product';
 import MainLayout from '@components/_layouts/MainLayout';
 
 const NewProduct = () => {
-	const [form, setForm] = useState({ name: '', description: '', category: '', price: 0 });
+	const [form, setForm] = useState({
+		name: '',
+		description: '',
+		category: '',
+		price: 0,
+		diskon: 0,
+		kelas: 0,
+		kodeJenis: '',
+		kodeMateri: '',
+		mataPelajaran: '',
+		penilaian: 0,
+		rating: 0,
+		stok: 0,
+		terjual: 0,
+	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [errors, setErrors] = useState<ProductType>({
 		name: '',
 		description: '',
 		category: '',
 		price: 0,
+		diskon: 0,
+		kelas: 0,
+		kodeJenis: '',
+		kodeMateri: '',
+		mataPelajaran: '',
+		penilaian: 0,
+		rating: 0,
+		stok: 0,
+		terjual: 0,
 	});
 	const router = useRouter();
 
@@ -40,7 +63,7 @@ const NewProduct = () => {
 				},
 				body: JSON.stringify(form),
 			});
-			router.push('/product');
+			router.push('/admin/product');
 		} catch (error) {
 			console.log(error);
 		}
@@ -79,6 +102,24 @@ const NewProduct = () => {
 		if (!form.price) {
 			err.price = 'Price is required';
 		}
+		if (!form.kelas) {
+			err.kelas = 'kelas is required';
+		}
+		if (!form.kodeJenis) {
+			err.kodeJenis = 'kodeJenis is required';
+		}
+		if (!form.kodeMateri) {
+			err.kodeMateri = 'kodeMateri is required';
+		}
+		if (!form.mataPelajaran) {
+			err.mataPelajaran = 'mataPelajaran is required';
+		}
+		if (!form.penilaian) {
+			err.penilaian = 'penilaian is required';
+		}
+		if (!form.stok) {
+			err.stok = 'stok is required';
+		}
 
 		return err;
 	};
@@ -102,8 +143,8 @@ const NewProduct = () => {
 										error={
 											errors.name
 												? {
-													content: 'Please enter a name',
-													pointing: 'below',
+														content: 'Please enter a name',
+														pointing: 'below',
 												  }
 												: null
 										}
@@ -120,8 +161,8 @@ const NewProduct = () => {
 										error={
 											errors.description
 												? {
-													content: 'Please enter a description',
-													pointing: 'below',
+														content: 'Please enter a description',
+														pointing: 'below',
 												  }
 												: null
 										}
@@ -130,36 +171,135 @@ const NewProduct = () => {
 									/>
 									<h3>Category</h3>
 									<Form.Radio
-										label="PDF"
-										name="pdf"
+										label="Softcopy"
+										name="softcopy"
 										value={form.category}
-										onChange={(e) => handleChangeCategory('PDF')}
+										onChange={(e) => handleChangeCategory('Softcopy')}
 									/>
 									<Form.Radio
-										label="Buku"
-										name="buku"
+										label="Hardcopy"
+										name="hardcopy"
 										value={form.category}
-										onChange={(e) => handleChangeCategory('Buku')}
-									/>
-									<Form.Radio
-										label="Video"
-										name="video"
-										value={form.category}
-										onChange={(e) => handleChangeCategory('Video')}
+										onChange={(e) => handleChangeCategory('Hardcopy')}
 									/>
 									<h3>Price</h3>
 									<Form.Input
 										error={
 											errors.price
 												? {
-													content: 'Please enter a price',
-													pointing: 'below',
+														content: 'Please enter a price',
+														pointing: 'below',
 												  }
 												: null
 										}
 										placeholder="Price"
 										name="price"
 										value={form.price}
+										onChange={handleChange}
+									/>
+									<h3>Kelas</h3>
+									<Form.Input
+										error={
+											errors.kelas
+												? {
+														content: 'Please enter a kelas',
+														pointing: 'below',
+												  }
+												: null
+										}
+										placeholder="Kelas"
+										name="kelas"
+										value={form.kelas}
+										onChange={handleChange}
+									/>
+									<h3>Kode Jenis</h3>
+									<Form.Input
+										error={
+											errors.kodeJenis
+												? {
+														content: 'Please enter a kodeJenis',
+														pointing: 'below',
+												  }
+												: null
+										}
+										placeholder="kodeJenis"
+										name="kodeJenis"
+										value={form.kodeJenis}
+										onChange={handleChange}
+									/>
+									<h3>Kode Materi</h3>
+									<Form.Input
+										error={
+											errors.kodeMateri
+												? {
+														content: 'Please enter a kodeMateri',
+														pointing: 'below',
+												  }
+												: null
+										}
+										placeholder="kodeMateri"
+										name="kodeMateri"
+										value={form.kodeMateri}
+										onChange={handleChange}
+									/>
+									<h3>Mata Pelajaran</h3>
+									<Form.Input
+										error={
+											errors.mataPelajaran
+												? {
+														content: 'Please enter a mataPelajaran',
+														pointing: 'below',
+												  }
+												: null
+										}
+										placeholder="mataPelajaran"
+										name="mataPelajaran"
+										value={form.mataPelajaran}
+										onChange={handleChange}
+									/>
+									<h3>Penilaian</h3>
+									<Form.Input
+										error={
+											errors.penilaian
+												? {
+														content: 'Please enter a penilaian',
+														pointing: 'below',
+												  }
+												: null
+										}
+										placeholder="penilaian"
+										name="penilaian"
+										value={form.penilaian}
+										onChange={handleChange}
+									/>
+									<h3>Stok</h3>
+									<Form.Input
+										error={
+											errors.stok
+												? {
+														content: 'Please enter a stok',
+														pointing: 'below',
+												  }
+												: null
+										}
+										placeholder="stok"
+										name="stok"
+										value={form.stok}
+										onChange={handleChange}
+									/>
+									<h3>Terjual</h3>
+									<Form.Input
+										error={
+											errors.terjual
+												? {
+														content: 'Please enter a terjual',
+														pointing: 'below',
+												  }
+												: null
+										}
+										placeholder="terjual"
+										name="terjual"
+										value={form.terjual}
 										onChange={handleChange}
 									/>
 									<div className="">
