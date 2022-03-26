@@ -30,7 +30,7 @@ export default function Header() {
 						Home
 					</Link>
 					<Link
-						href={session?.user.name === 'quenttok' ? '/admin/product' : 'product'}
+						href={session?.user.name === 'thinkeradmmin' ? '/admin/product' : 'product'}
 						className="px-4 py-2 text-white text-xl hover:bg-opacity-80"
 					>
 						Product

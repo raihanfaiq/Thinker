@@ -8,8 +8,8 @@ const Index = (): JSX.Element => {
 	return (
 		<div>
 			{!session && <Buyer />}
-			{session?.user && session?.user.name === 'quenttok' && <Admin />}
-			{session?.user && session?.user.name !== 'quenttok' && <Buyer />}
+			{session?.user && session?.user.name === 'thinkeradmmin' && <Admin />}
+			{session?.user && session?.user.name !== 'thinkeradmmin' && <Buyer />}
 			{session?.user && console.log(session.user)}
 		</div>
 	);
