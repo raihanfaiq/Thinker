@@ -29,6 +29,10 @@ const ProductSchema = new mongoose.Schema({
 	kodeJenis: String,
 	kodeMateri: String,
 	mataPelajaran: String,
+	linkGambar: {
+		type: String,
+		default: 'None',
+	},
 	penilaian: Number,
 	rating: {
 		type: mongoose.Decimal128,

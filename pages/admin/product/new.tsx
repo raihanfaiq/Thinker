@@ -11,12 +11,13 @@ const NewProduct = () => {
 	const [form, setForm] = useState({
 		name: '',
 		description: '',
-		category: '',
+		category: 'Softcopy',
 		price: 0,
 		diskon: 0,
 		kelas: 0,
 		kodeJenis: '',
 		kodeMateri: '',
+		linkGambar: '',
 		mataPelajaran: '',
 		penilaian: 0,
 		rating: 0,
@@ -69,8 +70,27 @@ const NewProduct = () => {
 		}
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		const Form = e.currentTarget;
+		const fileInput = Array.from(Form.elements).find(({ name }) => name === 'file');
+
+		const formData = new FormData();
+
+		for (const file of fileInput.files) {
+			formData.append('file', file);
+		}
+
+		formData.append('upload_preset', 'thinker');
+
+		const data = await fetch('https://api.cloudinary.com/v1_1/cloud51/image/upload', {
+			method: 'POST',
+			body: formData,
+		}).then((r) => r.json());
+
+		console.log(data.secure_url);
+
 		const errs = validate();
 		setErrors(errs);
 		setIsSubmitting(true);
@@ -302,6 +322,17 @@ const NewProduct = () => {
 										value={form.terjual}
 										onChange={handleChange}
 									/>
+									<div>
+										<Button as="label" htmlFor="file" type="button">
+											Upload image
+										</Button>
+										<input
+											type="file"
+											id="file"
+											name="file"
+											style={{ display: 'hidden' }}
+										/>
+									</div>
 									<div className="">
 										<Button basic color="blue" type="submit">
 											Create
