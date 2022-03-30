@@ -70,7 +70,7 @@ const NewProduct = () => {
 		}
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 
 		const Form = e.currentTarget;
@@ -84,12 +84,16 @@ const NewProduct = () => {
 
 		formData.append('upload_preset', 'thinker');
 
-		const data = await fetch('https://api.cloudinary.com/v1_1/cloud51/image/upload', {
+		const data = fetch('https://api.cloudinary.com/v1_1/cloud51/image/upload', {
 			method: 'POST',
 			body: formData,
 		}).then((r) => r.json());
 
 		console.log(data.secure_url);
+		setForm({
+			...form,
+			linkGambar: data.secure_url,
+		});
 
 		const errs = validate();
 		setErrors(errs);
@@ -119,27 +123,27 @@ const NewProduct = () => {
 		if (!form.description) {
 			err.description = 'Description is required';
 		}
-		if (!form.price) {
-			err.price = 'Price is required';
-		}
-		if (!form.kelas) {
-			err.kelas = 'kelas is required';
-		}
-		if (!form.kodeJenis) {
-			err.kodeJenis = 'kodeJenis is required';
-		}
-		if (!form.kodeMateri) {
-			err.kodeMateri = 'kodeMateri is required';
-		}
-		if (!form.mataPelajaran) {
-			err.mataPelajaran = 'mataPelajaran is required';
-		}
-		if (!form.penilaian) {
-			err.penilaian = 'penilaian is required';
-		}
-		if (!form.stok) {
-			err.stok = 'stok is required';
-		}
+		// if (!form.price) {
+		// 	err.price = 'Price is required';
+		// }
+		// if (!form.kelas) {
+		// 	err.kelas = 'kelas is required';
+		// }
+		// if (!form.kodeJenis) {
+		// 	err.kodeJenis = 'kodeJenis is required';
+		// }
+		// if (!form.kodeMateri) {
+		// 	err.kodeMateri = 'kodeMateri is required';
+		// }
+		// if (!form.mataPelajaran) {
+		// 	err.mataPelajaran = 'mataPelajaran is required';
+		// }
+		// if (!form.penilaian) {
+		// 	err.penilaian = 'penilaian is required';
+		// }
+		// if (!form.stok) {
+		// 	err.stok = 'stok is required';
+		// }
 
 		return err;
 	};
@@ -163,8 +167,8 @@ const NewProduct = () => {
 										error={
 											errors.name
 												? {
-														content: 'Please enter a name',
-														pointing: 'below',
+													content: 'Please enter a name',
+													pointing: 'below',
 												  }
 												: null
 										}
@@ -181,8 +185,8 @@ const NewProduct = () => {
 										error={
 											errors.description
 												? {
-														content: 'Please enter a description',
-														pointing: 'below',
+													content: 'Please enter a description',
+													pointing: 'below',
 												  }
 												: null
 										}
@@ -207,8 +211,8 @@ const NewProduct = () => {
 										error={
 											errors.price
 												? {
-														content: 'Please enter a price',
-														pointing: 'below',
+													content: 'Please enter a price',
+													pointing: 'below',
 												  }
 												: null
 										}
@@ -222,8 +226,8 @@ const NewProduct = () => {
 										error={
 											errors.kelas
 												? {
-														content: 'Please enter a kelas',
-														pointing: 'below',
+													content: 'Please enter a kelas',
+													pointing: 'below',
 												  }
 												: null
 										}
@@ -237,8 +241,8 @@ const NewProduct = () => {
 										error={
 											errors.kodeJenis
 												? {
-														content: 'Please enter a kodeJenis',
-														pointing: 'below',
+													content: 'Please enter a kodeJenis',
+													pointing: 'below',
 												  }
 												: null
 										}
@@ -252,8 +256,8 @@ const NewProduct = () => {
 										error={
 											errors.kodeMateri
 												? {
-														content: 'Please enter a kodeMateri',
-														pointing: 'below',
+													content: 'Please enter a kodeMateri',
+													pointing: 'below',
 												  }
 												: null
 										}
@@ -267,8 +271,8 @@ const NewProduct = () => {
 										error={
 											errors.mataPelajaran
 												? {
-														content: 'Please enter a mataPelajaran',
-														pointing: 'below',
+													content: 'Please enter a mataPelajaran',
+													pointing: 'below',
 												  }
 												: null
 										}
@@ -282,8 +286,8 @@ const NewProduct = () => {
 										error={
 											errors.penilaian
 												? {
-														content: 'Please enter a penilaian',
-														pointing: 'below',
+													content: 'Please enter a penilaian',
+													pointing: 'below',
 												  }
 												: null
 										}
@@ -297,8 +301,8 @@ const NewProduct = () => {
 										error={
 											errors.stok
 												? {
-														content: 'Please enter a stok',
-														pointing: 'below',
+													content: 'Please enter a stok',
+													pointing: 'below',
 												  }
 												: null
 										}
@@ -312,8 +316,8 @@ const NewProduct = () => {
 										error={
 											errors.terjual
 												? {
-														content: 'Please enter a terjual',
-														pointing: 'below',
+													content: 'Please enter a terjual',
+													pointing: 'below',
 												  }
 												: null
 										}

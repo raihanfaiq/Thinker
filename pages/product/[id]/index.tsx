@@ -95,7 +95,7 @@ const Product = ({ product }) => {
 											<div className="inline relative group h-48">
 												{/* <!-- Thumbnail --> */}
 												<img className="absolute rounded-t object-cover h-full w-full"
-													src="https://images.unsplash.com/photo-1627384113858-ce93ff568d1f?auto=format&fit=crop&w=1170&q=80"
+													src={product.linkGambar}
 													alt="Product Preview" />
 											</div>
 
