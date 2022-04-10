@@ -21,7 +21,7 @@ const Index = ({ products }) => {
 													<img
 														src={product.linkGambar}
 														alt="Image Caption"
-														className="w-full"
+														className="object-scale-down h-48 w-96"
 													/>
 													<div className="px-6 pt-4">
 														<Link href={`/product/${product._id}`}>
