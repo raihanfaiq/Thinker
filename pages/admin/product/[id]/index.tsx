@@ -195,7 +195,9 @@ const Product = ({ product }) => {
 											</div>
 
 											<div className="text-sm font-semibold text-gray-900 hover:underline truncate mt-4">
-												Jenis: {product.kodeJenis}
+												Jenis: {product.kodeJenis == 'J01' && <p>Materi Pelajaran (J01)</p>}
+												{product.kodeJenis == 'J02' && <p>Kumpulan Soal (J01)</p>}
+												{product.kodeJenis == 'J03' && <p>Konsultasi (J01)</p>}
 											</div>
 
 											<div className="text-sm font-semibold text-gray-900 hover:underline truncate mt-4">
