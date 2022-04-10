@@ -15,21 +15,33 @@ const Index = ({ products }) => {
 							{products.map((product) => {
 								return (
 									<div key={product._id}>
-										<Card>
+										<Card className="rounded-md shadow-lg overflow-hidden sm:w-64 bg-white sm:mb-0 md:w-80 lg:w-72">
 											<Card.Content>
 												<Card.Header>
+												<img src="https://source.unsplash.com/600x400" alt="Image Caption" className="w-full"/>
+												<div className="px-6 pt-4">
 													<Link href={`/product/${product._id}`}>
 														<a>{product.name}</a>
 													</Link>
-													<p>{product.description}</p>
-													<p>{product.price}</p>
+													<div>
+														<img src="/icon/rating-star.svg"/>
+														<img src="/icon/rating-star.svg"/>
+														<img src="/icon/rating-star.svg"/>
+														<img src="/icon/rating-star.svg"/>
+														<img src="/icon/rating-star.svg"/>
+													</div>
+													<div className="pt-6">
+														{product.price}
+													</div>
 													<p>{product.category}</p>
+												</div>
 												</Card.Header>
 											</Card.Content>
 											<Card.Content extra>
 												<Link href={`/product/${product._id}`}>
 													<Button primary>View</Button>
 												</Link>
+												<Button primary>Add to Cart</Button>
 											</Card.Content>
 										</Card>
 									</div>
