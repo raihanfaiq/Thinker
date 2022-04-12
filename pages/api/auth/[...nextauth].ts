@@ -57,6 +57,19 @@ export default NextAuth({
 	callbacks: {
 		async jwt({ token }) {
 			token.userRole = 'admin';
+			const res = await fetch('http://localhost:3000/api/users');
+			const { data } = await res.json();
+
+			if (data.find((datum: any) => datum.name !== token.name)) {
+				await fetch('http://localhost:3000/api/users', {
+					method: 'POST',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ name: token.name, cart: [] }),
+				});
+			}
 			return token;
 		},
 	},
