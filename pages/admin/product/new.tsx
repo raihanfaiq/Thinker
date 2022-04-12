@@ -70,7 +70,7 @@ const NewProduct = () => {
 		}
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e: any) => {
 		e.preventDefault();
 
 		const Form = e.currentTarget;
@@ -84,12 +84,12 @@ const NewProduct = () => {
 
 		formData.append('upload_preset', 'thinker');
 
-		const data = fetch('https://api.cloudinary.com/v1_1/cloud51/image/upload', {
+		const data = await fetch('https://api.cloudinary.com/v1_1/cloud51/image/upload', {
 			method: 'POST',
 			body: formData,
 		}).then((r) => r.json());
 
-		console.log(data.secure_url);
+		console.log('link gambar', data.secure_url);
 		setForm({
 			...form,
 			linkGambar: data.secure_url,
@@ -97,7 +97,7 @@ const NewProduct = () => {
 
 		const errs = validate();
 		setErrors(errs);
-		setIsSubmitting(true);
+		setIsSubmitting(false);
 	};
 
 	const handleChange = (e) => {

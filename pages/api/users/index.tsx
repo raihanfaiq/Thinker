@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import dbConnect from '../../../utils/dbConnect';
-import Product from '../../../models/Product';
+import User from '../../../models/User';
 
 dbConnect();
 
@@ -9,8 +9,8 @@ export default async (req, res) => {
 	switch (method) {
 		case 'GET':
 			try {
-				const products = await Product.find({});
-				res.status(200).json({ success: true, data: products });
+				const users = await User.find({});
+				res.status(200).json({ success: true, data: users });
 			} catch (error) {
 				res.status(400).json({ success: false, error: error.message });
 			}
@@ -18,9 +18,9 @@ export default async (req, res) => {
 
 		case 'POST':
 			try {
-				const product = await Product.create(req.body);
+				const user = await User.create(req.body);
 
-				res.status(201).json({ success: true, data: product });
+				res.status(201).json({ success: true, data: user });
 			} catch (error) {
 				res.status(400).json({ success: false, error: error.message });
 			}

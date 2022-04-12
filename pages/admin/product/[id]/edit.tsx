@@ -99,8 +99,8 @@ const EditProduct = ({ product }) => {
 										error={
 											errors.name
 												? {
-														content: 'Please enter a name',
-														pointing: 'below',
+													content: 'Please enter a name',
+													pointing: 'below',
 												  }
 												: null
 										}
@@ -117,8 +117,8 @@ const EditProduct = ({ product }) => {
 										error={
 											errors.description
 												? {
-														content: 'Please enter a description',
-														pointing: 'below',
+													content: 'Please enter a description',
+													pointing: 'below',
 												  }
 												: null
 										}
@@ -143,8 +143,8 @@ const EditProduct = ({ product }) => {
 										error={
 											errors.price
 												? {
-														content: 'Please enter a price',
-														pointing: 'below',
+													content: 'Please enter a price',
+													pointing: 'below',
 												  }
 												: null
 										}

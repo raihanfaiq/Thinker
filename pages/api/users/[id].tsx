@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import dbConnect from '../../../utils/dbConnect';
-import Product from '../../../models/Product';
+import User from '../../../models/User';
 
 dbConnect();
 
@@ -13,36 +13,36 @@ export default async (req, res) => {
 	switch (method) {
 		case 'GET':
 			try {
-				const product = await Product.findById(id);
-				if (!product) {
+				const user = await User.findById(id);
+				if (!user) {
 					return res.status(400).json({ success: false });
 				}
 
-				res.status(200).json({ success: true, data: product });
+				res.status(200).json({ success: true, data: user });
 			} catch (error) {
 				res.status(400).json({ success: false });
 			}
 			break;
 		case 'PUT':
 			try {
-				const product = await Product.findByIdAndUpdate(id, req.body, {
+				const user = await User.findByIdAndUpdate(id, req.body, {
 					new: true,
 					runValidators: true,
 				});
 
-				if (!product) {
+				if (!user) {
 					return res.status(400).json({ success: false });
 				}
 
-				res.status(200).json({ success: true, data: product });
+				res.status(200).json({ success: true, data: user });
 			} catch (error) {
 				res.status(400).json({ success: false });
 			}
 			break;
 		case 'DELETE':
 			try {
-				const deletedProduct = await Product.deleteOne({ _id: id });
-				if (!deletedProduct) {
+				const deletedUser = await User.deleteOne({ _id: id });
+				if (!deletedUser) {
 					return res.status(400).json({ success: false });
 				}
 
