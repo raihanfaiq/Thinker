@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from '@components/_shared/Link';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import React from 'react';
