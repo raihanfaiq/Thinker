@@ -59,10 +59,13 @@ const Product = ({ product }) => {
 		}
 
 		const userEmail = session.user.email;
+		const image = product.linkGambar;
+		const price = product.price;
+		const name = product.name;
 
 		const response = await fetch(`/api/cart/${productId}`, {
 			method: 'POST',
-			body: JSON.stringify({ userEmail, quantity: 1 }),
+			body: JSON.stringify({ userEmail, quantity: 1, image, price, name }),
 		});
 		const data = await response.json();
 		return data.cart;

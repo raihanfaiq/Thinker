@@ -2,6 +2,7 @@ import dbConnect from '../../../utils/dbConnect';
 import User from '../../../models/User';
 import Product from '../../../models/Product';
 import { MdOutlineThumbsUpDown } from 'react-icons/md';
+import { getToken } from 'next-auth/jwt';
 dbConnect();
 
 export default async (req, res) => {
@@ -12,6 +13,9 @@ export default async (req, res) => {
 	const obj = JSON.parse(req.body);
 	const Email = obj.userEmail;
 	const quantity = obj.quantity;
+	const image = obj.image;
+	const price = obj.price;
+	const name = obj.name;
 
 	switch (method) {
 		case 'POST':
@@ -31,7 +35,7 @@ export default async (req, res) => {
 						user.products[itemIndex] = productItem;
 					} else {
 						//product does not exists in user, add new item
-						user.products.push({ productId: id, quantity });
+						user.products.push({ productId: id, quantity, image, price, name });
 					}
 					user = await user.save();
 					return res.status(201).send(user);
@@ -39,7 +43,7 @@ export default async (req, res) => {
 					//no user for user, create new user
 					const newUser = await User.create({
 						email: Email,
-						products: [{ productId: id, quantity }],
+						products: [{ productId: id, quantity, image, price, name }],
 					});
 
 					return res.status(201).send(newUser);
