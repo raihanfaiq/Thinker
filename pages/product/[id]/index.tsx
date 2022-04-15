@@ -298,7 +298,6 @@ const Product = ({ product }) => {
 					</div>
 				</section>
 			</MainLayout>
-			<Confirm open={confirm} onCancel={close} onConfirm={handleDelete} />
 		</div>
 	);
 };

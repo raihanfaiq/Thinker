@@ -5,13 +5,13 @@ import Product from '../../../models/Product';
 
 dbConnect();
 
-export default async (req, res) => {
+const index = async (req, res) => {
 	const { method } = req;
 
 	switch (method) {
 		case 'GET':
 			try {
-				const users = await User.find({ email: 'quenttok@gmail.com' });
+				const users = await User.find({ });
 				res.status(200).json({ success: true, data: users });
 			} catch (error) {
 				res.status(400).json({ success: false, error: error.message });
@@ -33,3 +33,5 @@ export default async (req, res) => {
 			break;
 	}
 };
+
+export default index;

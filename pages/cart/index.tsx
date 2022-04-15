@@ -49,7 +49,7 @@ const Index = ({ products }) => {
 };
 
 Index.getInitialProps = async (req) => {
-	const res = await fetch(`http://localhost:3000/api/cart`);
+	const res = await fetch('http://localhost:3000/api/cart');
 	const { data } = await res.json();
 	let obj = data.find((o) => o.email === 'quenttok@gmail.com');
 	obj = obj.products;

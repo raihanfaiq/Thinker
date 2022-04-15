@@ -7,9 +7,6 @@ import { Button, Card } from 'semantic-ui-react';
 import MainLayout from '@components/_layouts/MainLayout';
 
 const Index = ({ products }) => {
-	const [isView, setIsView] = useState(false);
-	const router = useRouter();
-	console.log(products);
 
 	const updateProduct = async (_id: string, views: number) => {
 		try {
