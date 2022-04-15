@@ -141,7 +141,7 @@ const Product = ({ product }) => {
 												>
 													{/* <!-- Price --> */}
 													<div className="text-sm text-gray-600 font-bold mt-4 mb-1">
-														{product.price}
+														Rp. {product.price}
 													</div>
 												</a>
 											</div>
@@ -198,11 +198,19 @@ const Product = ({ product }) => {
 													</div>
 
 													{/* <!-- Statistic --> */}
-													<div
-														className="text-xxs text-gray-400 mt-1"
-														title="34k Downlaods in this year"
-													>
+													<div className="flex flex-row group space-x-6">
+														<div
+															className="text-xxs text-gray-400 mt-1"
+															title="34k Downlaods in this year"
+														>
 														Terjual: {product.terjual}
+														</div>
+														<div
+															className="text-xxs text-gray-400 mt-1"
+															title="34k Downlaods in this year"
+														>
+														Dilihat: {product.views}
+														</div>
 													</div>
 												</div>
 

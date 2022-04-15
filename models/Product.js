@@ -38,6 +38,10 @@ const ProductSchema = new mongoose.Schema({
 		type: Number,
 		default: 0,
 	},
+	views: {
+		type: Number,
+		default: 1,
+	}
 });
 
 export default mongoose.models.Product || mongoose.model('Product', ProductSchema);
