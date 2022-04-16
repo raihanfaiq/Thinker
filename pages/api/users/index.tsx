@@ -18,6 +18,13 @@ export default async (req, res) => {
 
 		case 'POST':
 			try {
+				const emailExist = await User.findOne({ email: req.body.email });
+				if (emailExist) {
+					return res.status(400).json({
+						status: res.statusCode,
+						message: 'Email Sudah digunakan !',
+					});
+				}
 				const user = await User.create(req.body);
 
 				res.status(201).json({ success: true, data: user });

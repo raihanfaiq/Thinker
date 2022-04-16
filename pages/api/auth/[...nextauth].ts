@@ -61,6 +61,7 @@ export default NextAuth({
 			const { data } = await res.json();
 
 			if (data.find((datum: any) => datum.email.toString() !== token.email.toString())) {
+				console.log('hai');
 				await fetch('http://localhost:3000/api/users', {
 					method: 'POST',
 					headers: {

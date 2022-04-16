@@ -63,7 +63,7 @@ const Product = ({ product }) => {
 		const name = product.name;
 
 		const response = await fetch(`/api/cart/${productId}`, {
-			method: 'POST',
+			method: 'PUT',
 			body: JSON.stringify({ userEmail, quantity: 1, image, price, name }),
 		});
 		const data = await response.json();

@@ -1,3 +1,6 @@
+/* eslint-disable import/no-anonymous-default-export */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prefer-const */
 import dbConnect from '../../../utils/dbConnect';
 import User from '../../../models/User';
 import Product from '../../../models/Product';
@@ -18,36 +21,26 @@ export default async (req, res) => {
 	const name = obj.name;
 
 	switch (method) {
-		case 'POST':
+		case 'PUT':
 			try {
 				let user = await User.findOne({ email: Email });
-				console.log(user);
+				console.log('add to cart', user);
 				let product = await Product.findOne({ _id: id });
-				// console.log(product);
-				if (user) {
-					//user exists for user
-					let itemIndex = user.products.findIndex((p) => p.productId == id);
+				//user exists for user
+				let itemIndex = user.products.findIndex((p) => p.productId == id);
 
-					if (itemIndex > -1) {
-						//product exists in the user, update the quantity
-						let productItem = user.products[itemIndex];
-						productItem.quantity += 1;
-						user.products[itemIndex] = productItem;
-					} else {
-						//product does not exists in user, add new item
-						user.products.push({ productId: id, quantity, image, price, name });
-					}
-					user = await user.save();
-					return res.status(201).send(user);
+				if (itemIndex > -1) {
+					//product exists in the user, update the quantity
+					let productItem = user.products[itemIndex];
+					productItem.quantity += 1;
+					user.products[itemIndex] = productItem;
+					await User.findByIdAndUpdate(user.id, user);
 				} else {
-					//no user for user, create new user
-					const newUser = await User.create({
-						email: Email,
-						products: [{ productId: id, quantity, image, price, name }],
-					});
-
-					return res.status(201).send(newUser);
+					//product does not exists in user, add new item
+					user.products.push({ productId: id, quantity, image, price, name });
+					await User.findByIdAndUpdate(user.id, user);
 				}
+				return res.status(201).json({ success: true });
 			} catch (err) {
 				console.log(err);
 				res.status(500).send('Something went wrong');
