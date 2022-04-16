@@ -52,7 +52,6 @@ const Product = ({ product }) => {
 	};
 
 	const addToCartHandler = async () => {
-		console.log('add to cart');
 		const productId = router.query.id;
 		{
 			!session && router.push('/api/auth/signin');
@@ -68,7 +67,8 @@ const Product = ({ product }) => {
 			body: JSON.stringify({ userEmail, quantity: 1, image, price, name }),
 		});
 		const data = await response.json();
-		return data.cart;
+		console.log(data);
+		router.push(`/cart/${userEmail}`);
 	};
 
 	return (
@@ -203,13 +203,13 @@ const Product = ({ product }) => {
 															className="text-xxs text-gray-400 mt-1"
 															title="34k Downlaods in this year"
 														>
-														Terjual: {product.terjual}
+															Terjual: {product.terjual}
 														</div>
 														<div
 															className="text-xxs text-gray-400 mt-1"
 															title="34k Downlaods in this year"
 														>
-														Dilihat: {product.views}
+															Dilihat: {product.views}
 														</div>
 													</div>
 												</div>
