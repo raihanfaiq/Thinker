@@ -23,14 +23,25 @@ const Index = ({ products }) => {
 														alt="Image Caption"
 														className="object-scale-down h-48 w-96"
 													/>
-													<div className="px-6 pt-4">
+													<div className="px-6 pt-2">
 														<Link
 															href={`/product/${product.productId}`}
 														>
 															<a>{product.name}</a>
 														</Link>
 
-														<div className="pt-6">{product.price}</div>
+														<div className="pt-5 flex row justify-between">
+															<div className="text-xl">Price</div>
+															<div className="text-xl">{product.price}</div>
+														</div>
+														<div className="pt-1 flex row justify-between">
+															<div className="text-xl mt-2">Quantity</div>
+															<div className="flex row">
+																<Button class>+</Button>
+																<div className="text-xl mt-2 mx-2">{product.quantity}</div>
+																<Button>-</Button>
+															</div>
+														</div>
 													</div>
 												</Card.Header>
 											</Card.Content>
@@ -38,6 +49,15 @@ const Index = ({ products }) => {
 									</div>
 								);
 							})}
+						</div>
+						<div className="flex-cc row gap-4 mt-4">
+							<div className="p-2 w-36 mt-10 rounded-xl text-white bg-white text-justify z-10">
+								<a href="">
+									<h1 className="text-xl font-bold text-center z-10">
+										Checkout
+									</h1>
+								</a>
+							</div>
 						</div>
 					</div>
 				</section>

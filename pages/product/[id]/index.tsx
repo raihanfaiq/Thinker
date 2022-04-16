@@ -68,7 +68,7 @@ const Product = ({ product }) => {
 		});
 		const data = await response.json();
 		console.log(data);
-		router.push(`/cart/${userEmail}`);
+		alert('product added to cart');
 	};
 
 	return (
@@ -99,7 +99,7 @@ const Product = ({ product }) => {
 							<div className="flex flex-col">
 								<div className="flex flex-col items-center justify-center mt-32 z-20 w-full">
 									{/* <!-- Product Card --> */}
-									<div className="flex flex-col shadow-md cursor-pointer w-96 hover:-translate-y-1 duration-300">
+									<div className="flex flex-col shadow-md cursor-pointer w-[40rem] hover:-translate-y-1 duration-300">
 										{/* <!-- Body --> */}
 										<div className="flex flex-col bg-white rounded-b p-3">
 											{/* <!-- Title --> */}
@@ -123,7 +123,7 @@ const Product = ({ product }) => {
 												</a>
 											</div>
 											{/* <!-- Preview --> */}
-											<div className="inline relative group h-48">
+											<div className="inline relative group h-64">
 												{/* <!-- Thumbnail --> */}
 												<img
 													className="absolute rounded-t object-cover h-full w-full"
@@ -239,7 +239,7 @@ const Product = ({ product }) => {
 								</div>
 								<div className="flex flex-col items-center justify-center mt-6 z-20 w-full">
 									{/* <!-- Product Card --> */}
-									<div className="flex flex-col shadow-md cursor-pointer w-96 hover:-translate-y-1 duration-300">
+									<div className="flex flex-col shadow-md cursor-pointer w-[40rem] hover:-translate-y-1 duration-300">
 										{/* <!-- Body --> */}
 										<div className="flex flex-col bg-white rounded-b p-3">
 											{/* <!-- Title --> */}
