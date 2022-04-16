@@ -69,7 +69,8 @@ export default function Header() {
 						{session?.user && (
 							<>
 								{session.user.image && (
-									<span
+									<Link
+										href="/me"
 										style={{ backgroundImage: `url('${session.user.image}')` }}
 										className={styles.avatar}
 									/>

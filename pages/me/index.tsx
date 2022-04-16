@@ -28,7 +28,7 @@ export default function MePage() {
 											{data?.user.email}
 										</div>
 										{/* <!-- Preview --> */}
-										<div className="inline relative group h-48">
+										<div className="inline relative group h-48 mb-6">
 											{/* <!-- Thumbnail --> */}
 											<img
 												className="absolute rounded-t object-cover h-full w-full"
