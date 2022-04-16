@@ -3,8 +3,56 @@ import 'semantic-ui-css/semantic.min.css';
 import fetch from 'isomorphic-unfetch';
 import { Button, Card } from 'semantic-ui-react';
 import MainLayout from '@components/_layouts/MainLayout';
+import { signIn, signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 const Index = ({ products }) => {
+	const { data: session, status } = useSession();
+	const router = useRouter();
+	const increment = async (product) => {
+		const userEmail = router.query.email;
+		const quantity = product.quantity;
+		// console.log(quantity + 1);
+		// console.log(product.productId);
+
+		const response = await fetch(`/api/cart/update/increment`, {
+			method: 'PUT',
+			body: JSON.stringify({ userEmail, productId: product.productId }),
+		});
+		window.location.reload();
+		// const data = await response.json();
+		// console.log(data);
+		// alert('product added to cart');
+	};
+	const decrement = async (product) => {
+		const userEmail = router.query.email;
+		const quantity = product.quantity;
+		// console.log(quantity + 1);
+		// console.log(product.productId);
+
+		const response = await fetch(`/api/cart/update/decrement`, {
+			method: 'PUT',
+			body: JSON.stringify({ userEmail, productId: product.productId }),
+		});
+		window.location.reload();
+		// const data = await response.json();
+		// console.log(data);
+		// alert('product added to cart');
+	};
+	const deleteButton = async (product) => {
+		const userEmail = router.query.email;
+		// console.log(quantity + 1);
+		// console.log(product.productId);
+
+		const response = await fetch(`/api/cart/update/delete`, {
+			method: 'PUT',
+			body: JSON.stringify({ userEmail, productId: product.productId }),
+		});
+		window.location.reload();
+		// const data = await response.json();
+		// console.log(data);
+		// alert('product added to cart');
+	};
 	return (
 		<div className="bg-sky">
 			<MainLayout title="New Product">
@@ -30,17 +78,46 @@ const Index = ({ products }) => {
 															<a>{product.name}</a>
 														</Link>
 
+														<div className="pt-1 flex row justify-between">
+															<div className="text-xl mt-2">
+																Quantity
+															</div>
+															<div className="flex row">
+																<Button
+																	class
+																	onClick={() =>
+																		increment(product)
+																	}
+																>
+																	+
+																</Button>
+																<div className="text-xl mt-2 mx-2">
+																	{product.quantity}
+																</div>
+																<Button
+																	onClick={() =>
+																		decrement(product)
+																	}
+																>
+																	-
+																</Button>
+															</div>
+														</div>
 														<div className="pt-5 flex row justify-between">
 															<div className="text-xl">Price</div>
-															<div className="text-xl">{product.price}</div>
-														</div>
-														<div className="pt-1 flex row justify-between">
-															<div className="text-xl mt-2">Quantity</div>
-															<div className="flex row">
-																<Button class>+</Button>
-																<div className="text-xl mt-2 mx-2">{product.quantity}</div>
-																<Button>-</Button>
+															<div className="text-xl">
+																{product.price * product.quantity}
 															</div>
+														</div>
+														<div className="pt-5 flex row">
+															<Button
+																class
+																onClick={() =>
+																	deleteButton(product)
+																}
+															>
+																Delete
+															</Button>
 														</div>
 													</div>
 												</Card.Header>
@@ -53,9 +130,7 @@ const Index = ({ products }) => {
 						<div className="flex-cc row gap-4 mt-4">
 							<div className="p-2 w-36 mt-10 rounded-xl text-white bg-white text-justify z-10">
 								<a href="">
-									<h1 className="text-xl font-bold text-center z-10">
-										Checkout
-									</h1>
+									<h1 className="text-xl font-bold text-center z-10">Checkout</h1>
 								</a>
 							</div>
 						</div>
