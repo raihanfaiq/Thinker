@@ -1,13 +1,10 @@
 import Link from 'next/link';
 import 'semantic-ui-css/semantic.min.css';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
 import fetch from 'isomorphic-unfetch';
 import { Button, Card } from 'semantic-ui-react';
 import MainLayout from '@components/_layouts/MainLayout';
 
 const Index = ({ products }) => {
-
 	const updateProduct = async (_id: string, views: number) => {
 		try {
 			const res = await fetch(`http://localhost:3000/api/products/${_id}`, {
@@ -59,9 +56,19 @@ const Index = ({ products }) => {
 											</Card.Content>
 											<Card.Content extra>
 												<Link href={`/product/${product._id}`}>
-													<Button primary onClick={() => updateProduct(product._id, product.views)}>View</Button>
+													<Button
+														primary
+														onClick={() =>
+															updateProduct(
+																product._id,
+																product.views
+															)
+														}
+													>
+														View
+													</Button>
 												</Link>
-												<Button primary>Add to Cart</Button>
+												{/* <Button primary>Add to Cart</Button> */}
 											</Card.Content>
 										</Card>
 									</div>
