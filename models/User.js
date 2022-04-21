@@ -15,6 +15,17 @@ const UserSchema = new mongoose.Schema({
 			quantity: Number,
 		},
 	],
+	address: [
+		{
+			namaLengkap: String,
+			noTelp: String,
+			kodePos: String,
+			jalan: String,
+			detailLain: String,
+			tandaiSebagai: String,
+			alamatUtama: Boolean,
+		},
+	],
 });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);

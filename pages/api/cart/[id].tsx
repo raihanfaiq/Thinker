@@ -4,8 +4,7 @@
 import dbConnect from '../../../utils/dbConnect';
 import User from '../../../models/User';
 import Product from '../../../models/Product';
-import { MdOutlineThumbsUpDown } from 'react-icons/md';
-import { getToken } from 'next-auth/jwt';
+
 dbConnect();
 
 export default async (req, res) => {
