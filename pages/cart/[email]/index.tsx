@@ -15,7 +15,7 @@ const Index = ({ products }) => {
 		// console.log(quantity + 1);
 		// console.log(product.productId);
 
-		const response = await fetch(`/api/cart/update/increment`, {
+		const response = await fetch('/api/cart/update/increment', {
 			method: 'PUT',
 			body: JSON.stringify({ userEmail, productId: product.productId }),
 		});
@@ -30,7 +30,7 @@ const Index = ({ products }) => {
 		// console.log(quantity + 1);
 		// console.log(product.productId);
 
-		const response = await fetch(`/api/cart/update/decrement`, {
+		const response = await fetch('/api/cart/update/decrement', {
 			method: 'PUT',
 			body: JSON.stringify({ userEmail, productId: product.productId }),
 		});
@@ -44,7 +44,7 @@ const Index = ({ products }) => {
 		// console.log(quantity + 1);
 		// console.log(product.productId);
 
-		const response = await fetch(`/api/cart/update/delete`, {
+		const response = await fetch('/api/cart/update/delete', {
 			method: 'PUT',
 			body: JSON.stringify({ userEmail, productId: product.productId }),
 		});

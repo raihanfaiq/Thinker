@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import dbConnect from '../../../../../utils/dbConnect';
 import User from '../../../../../models/User';
 import Product from '../../../../../models/Product';
@@ -13,9 +14,9 @@ export default async (req, res) => {
 	switch (method) {
 		case 'PUT':
 			try {
-				let user = await User.findOne({ email: email });
+				const user = await User.findOne({ email: email });
 				// console.log(user);
-				let itemIndex = user.address.findIndex((p) => p._id == id);
+				const itemIndex = user.address.findIndex((p) => p._id == id);
 				console.log('itemIndex', itemIndex);
 				if (itemIndex > -1) {
 					//product exists in the user, update the quantity
