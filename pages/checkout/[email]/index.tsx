@@ -26,9 +26,9 @@ const Index = ({ address }) => {
 								{address?.map((address, i) => (
 									<div className="flex flex-col shadow-md cursor-pointer w-[60rem] hover:-translate-y-1 duration-300 mb-8"  key={i}>
 										{/* <!-- Body --> */}
-										<div className="flex flex-col bg-white rounded-xl p-5 hover:bg-gray-300" onClick={() => handleClick(i)}>
+										<div className="flex flex-col bg-white rounded-xl p-5 hover:bg-gray-300">
 											{/* <!-- Title --> */}
-											<div className="flex flex-row">
+											<div className="flex flex-row" onClick={() => handleClick(i)}>
 												<div className="text-xl font-semibold text-gray-900 hover:underline truncate">
 													{address.namaLengkap}
 												</div>

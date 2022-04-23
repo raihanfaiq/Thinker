@@ -13,7 +13,6 @@ const Index = ({ products, address }) => {
 
 	const indexUtama = address.findIndex((item) => item?.alamatUtama === true);
 	const totalProduct = products.map((p) => p.price * p.quantity).reduce((a, b) => a + b, 0);
-	console.log(totalProduct);
 
 	return (
 		<div className="bg-sky">
@@ -101,7 +100,7 @@ const Index = ({ products, address }) => {
 													Opsi Pengiriman
 												</div>
 												<div className="cursor-pointer hover:-translate-y-1 duration-300" >
-													<Link href={`checkout/${data?.user.email}/${address[indexUtama]._id}/provider`}>
+													<Link href={`/checkout/${data?.user.email}/${address[indexUtama]._id}/provider`}>
 														<Button>Pilih Provider</Button>
 													</Link>
 												</div>

@@ -27,6 +27,11 @@ const UserSchema = new mongoose.Schema({
 			alamatUtama: Boolean,
 		},
 	],
+	provider: {
+		nama: String,
+		harga: Number,
+		layanan: String,
+	},
 });
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);

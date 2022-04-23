@@ -15,6 +15,7 @@ const NewAddress = () => {
 		noTelp: '',
 		kodePos: '',
 		jalan: '',
+		kota: '',
 		detailLain: '',
 		tandaiSebagai: '',
 		alamatUtama: true,
@@ -25,6 +26,7 @@ const NewAddress = () => {
 		noTelp: '',
 		kodePos: '',
 		jalan: '',
+		kota: '',
 		detailLain: '',
 		tandaiSebagai: '',
 		alamatUtama: true,
@@ -101,7 +103,7 @@ const NewAddress = () => {
 							</Loader>
 						) : (
 							<div className="z-20 w-1/2 bg-gradient-to-bl from-sky shadow-2xl p-4 rounded-2xl mt-10">
-								<h1 className="text-4xl z-20 my-4 flex-cc">Create Address</h1>
+								<h1 className="text-4xl z-20 my-4 flex-cc">Alamat Baru</h1>
 								<Form onSubmit={handleSubmit}>
 									<h3>Kontak</h3>
 									<div className="mb-3">
@@ -139,6 +141,23 @@ const NewAddress = () => {
 										/>
 									</div>
 									<h3>Alamat</h3>
+									<div className="mb-3">
+										<Form.Input
+											fluid
+											error={
+												errors.kota
+													? {
+														content: 'Please enter a kota',
+														pointing: 'below',
+												  }
+													: null
+											}
+											placeholder="Kota"
+											name="kota"
+											value={form.kota}
+											onChange={handleChange}
+										/>
+									</div>
 									<div className="mb-3">
 										<Form.Input
 											fluid
