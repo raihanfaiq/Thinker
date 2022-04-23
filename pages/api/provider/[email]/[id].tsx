@@ -1,10 +1,11 @@
+/* eslint-disable import/no-anonymous-default-export */
 import dbConnect from '../../../../utils/dbConnect';
 import User from '../../../../models/User';
-const jsonJarak = require('./jarak.json');
-const jsonHarga = require('./harga.json');
+import jsonJarak from './jarak.json';
+import jsonHarga from './harga.json';
 dbConnect();
 
-export default async (req, res) => {
+export default async (req: { query: { email: any; id: any; }; method: any; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { success: boolean; data?: any; error?: any; }): void; new(): any; }; }; }) => {
 	const {
 		query: { email, id },
 		method,
@@ -26,14 +27,14 @@ export default async (req, res) => {
 	switch (method) {
 		case 'GET':
 			try {
-				let user = await User.findOne({ email: email });
+				const user = await User.findOne({ email: email });
 				console.log(user);
-				let kotaUser = user.address.find((x) => x.id === id).kota.toLowerCase();
+				const kotaUser = user.address.find((x: { id: any; }) => x.id === id).kota.toLowerCase();
 
-				let listJarak = jsonJarak.kota;
+				const listJarak = jsonJarak.kota;
 				// console.log(listJarak[0].nama);
-				let jarak = listJarak.find((x) => x.nama === kotaUser).jarak;
-				let biaya = jsonHarga;
+				const jarak = listJarak.find((x: { nama: any; }) => x.nama === kotaUser).jarak;
+				const biaya = jsonHarga;
 				for (let i = 0; i < biaya.harga.length; i++) {
 					biaya.harga[i].harga = biaya.harga[i].harga * jarak;
 				}

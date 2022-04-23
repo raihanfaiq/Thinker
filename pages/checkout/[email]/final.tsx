@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/link-passhref */
 import Link from 'next/link';
 import 'semantic-ui-css/semantic.min.css';
 import fetch from 'isomorphic-unfetch';
@@ -7,52 +8,8 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 const Index = ({ products, address }) => {
-	const { data: session, status } = useSession();
+	const { data } = useSession();
 	const router = useRouter();
-	const increment = async (product) => {
-		const userEmail = router.query.email;
-		const quantity = product.quantity;
-		// console.log(quantity + 1);
-		// console.log(product.productId);
-
-		const response = await fetch('/api/cart/update/increment', {
-			method: 'PUT',
-			body: JSON.stringify({ userEmail, productId: product.productId }),
-		});
-		window.location.reload();
-		// const data = await response.json();
-		// console.log(data);
-		// alert('product added to cart');
-	};
-	const decrement = async (product) => {
-		const userEmail = router.query.email;
-		const quantity = product.quantity;
-		// console.log(quantity + 1);
-		// console.log(product.productId);
-
-		const response = await fetch('/api/cart/update/decrement', {
-			method: 'PUT',
-			body: JSON.stringify({ userEmail, productId: product.productId }),
-		});
-		window.location.reload();
-		// const data = await response.json();
-		// console.log(data);
-		// alert('product added to cart');
-	};
-	const deleteButton = async (product) => {
-		const userEmail = router.query.email;
-		// console.log(quantity + 1);
-		// console.log(product.productId);
-
-		const response = await fetch('/api/cart/update/delete', {
-			method: 'PUT',
-			body: JSON.stringify({ userEmail, productId: product.productId }),
-		});
-		window.location.reload();
-		// const data = await response.json();
-		// console.log(data);
-		// alert('product added to cart');
-	};
 
 	const indexUtama = address.findIndex((item) => item?.alamatUtama === true);
 	const totalProduct = products.map((p) => p.price * p.quantity).reduce((a, b) => a + b, 0);
@@ -144,7 +101,7 @@ const Index = ({ products, address }) => {
 													Opsi Pengiriman
 												</div>
 												<div className="cursor-pointer hover:-translate-y-1 duration-300" >
-													<Link href={'/checkout/provider'}>
+													<Link href={`checkout/${data?.user.email}/${address[indexUtama]._id}/provider`}>
 														<Button>Pilih Provider</Button>
 													</Link>
 												</div>
