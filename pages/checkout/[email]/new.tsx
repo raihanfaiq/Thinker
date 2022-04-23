@@ -3,10 +3,13 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Button, Form, Loader } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 import { useRouter } from 'next/router';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import MainLayout from '@components/_layouts/MainLayout';
 
 const NewAddress = () => {
+	const { data } = useSession();
 	const [form, setForm] = useState({
 		namaLengkap: '',
 		noTelp: '',
@@ -40,9 +43,9 @@ const NewAddress = () => {
 		}
 	}, [errors]);
 
-	const createAddress = async ({ query: { email } }) => {
+	const createAddress = async () => {
 		try {
-			const res = await fetch(`http://localhost:3000/api/users/address/${email}`, {
+			const res = await fetch(`http://localhost:3000/api/users/address/${data?.user.email}`, {
 				method: 'POST',
 				headers: {
 					Accept: 'application/json',
@@ -50,7 +53,7 @@ const NewAddress = () => {
 				},
 				body: JSON.stringify(form),
 			});
-			router.push('/admin/product');
+			router.push(`/checkout/${data?.user.email}`);
 		} catch (error) {
 			console.log(error);
 		}
@@ -58,10 +61,9 @@ const NewAddress = () => {
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
-
 		const errs = validate();
 		setErrors(errs);
-		setIsSubmitting(false);
+		setIsSubmitting(true);
 	};
 
 	const handleChange = (e) => {
@@ -83,9 +85,6 @@ const NewAddress = () => {
 
 		if (!form.namaLengkap) {
 			err.namaLengkap = 'Nama is required';
-		}
-		if (!form.jalan) {
-			err.jalan = 'Jalan is required';
 		}
 
 		return err;

@@ -6,53 +6,9 @@ import MainLayout from '@components/_layouts/MainLayout';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-const Index = ({ products, address }) => {
+const Index = ({ address }) => {
 	const { data: session, status } = useSession();
 	const router = useRouter();
-	const increment = async (product) => {
-		const userEmail = router.query.email;
-		const quantity = product.quantity;
-		// console.log(quantity + 1);
-		// console.log(product.productId);
-
-		const response = await fetch('/api/cart/update/increment', {
-			method: 'PUT',
-			body: JSON.stringify({ userEmail, productId: product.productId }),
-		});
-		window.location.reload();
-		// const data = await response.json();
-		// console.log(data);
-		// alert('product added to cart');
-	};
-	const decrement = async (product) => {
-		const userEmail = router.query.email;
-		const quantity = product.quantity;
-		// console.log(quantity + 1);
-		// console.log(product.productId);
-
-		const response = await fetch('/api/cart/update/decrement', {
-			method: 'PUT',
-			body: JSON.stringify({ userEmail, productId: product.productId }),
-		});
-		window.location.reload();
-		// const data = await response.json();
-		// console.log(data);
-		// alert('product added to cart');
-	};
-	const deleteButton = async (product) => {
-		const userEmail = router.query.email;
-		// console.log(quantity + 1);
-		// console.log(product.productId);
-
-		const response = await fetch('/api/cart/update/delete', {
-			method: 'PUT',
-			body: JSON.stringify({ userEmail, productId: product.productId }),
-		});
-		window.location.reload();
-		// const data = await response.json();
-		// console.log(data);
-		// alert('product added to cart');
-	};
 
 	console.log(address);
 	return (
@@ -62,7 +18,7 @@ const Index = ({ products, address }) => {
 					<div className="flex flex-cc col">
 						<div className="flex flex-col">
 							<div className="flex flex-col items-center justify-center mt-8 z-20 w-full">
-								<h1 className="text-center text-white mb-12">Pilih Alamat</h1>
+								<h1 className="text-center text-white mb-12">Pilih Provider</h1>
 								{/* <!-- User Card --> */}
 								{address.map((address, i) => (
 									<div className="flex flex-col shadow-md cursor-pointer w-[60rem] hover:-translate-y-1 duration-300 mb-8"  key={i}>
@@ -111,7 +67,7 @@ const Index = ({ products, address }) => {
 	);
 };
 
-Index.getInitialProps = async ({ query: { email } }) => {
+Index.getInitialProps = async ({ }) => {
 	const res = await fetch('http://localhost:3000/api/users/address');
 	const { data } = await res.json();
 	let obj = data.find((o) => o.email === 'quenttok@gmail.com');

@@ -55,8 +55,9 @@ const Index = ({ products, address }) => {
 	};
 
 	const indexUtama = address.findIndex((item) => item?.alamatUtama === true);
+	const totalProduct = products.map((p) => p.price * p.quantity).reduce((a, b) => a + b, 0);
+	console.log(totalProduct);
 
-	console.log(products);
 	return (
 		<div className="bg-sky">
 			<MainLayout title="New Product">
@@ -138,8 +139,15 @@ const Index = ({ products, address }) => {
 											</div>
 										</div>
 										<div className='m-1 p-5 rounded-xl bg-gray-100'>
-											<div className="mb-2 text-xl font-semibold hover:underline truncate">
-												Opsi Pengiriman
+											<div className='flex-bs flex-row'>
+												<div className="mb-2 text-xl font-semibold hover:underline truncate">
+													Opsi Pengiriman
+												</div>
+												<div className="cursor-pointer hover:-translate-y-1 duration-300" >
+													<Link href={'/checkout/provider'}>
+														<Button>Pilih Provider</Button>
+													</Link>
+												</div>
 											</div>
 											<div className="text-xl text-gray-900 truncate">
 												JNE
@@ -162,7 +170,7 @@ const Index = ({ products, address }) => {
 													Subtotal Produk
 												</div>
 												<div className="text-xl text-gray-900 truncate">
-													Rp. 10.000
+													Rp. {totalProduct}
 												</div>
 											</div>
 											<div className='flex flex-row flex-bs mb-1'>

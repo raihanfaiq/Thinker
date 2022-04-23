@@ -7,7 +7,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 const Index = ({ products }) => {
-	const { data: session, status } = useSession();
+	const { data } = useSession();
 	const router = useRouter();
 	const increment = async (product) => {
 		const userEmail = router.query.email;
@@ -129,7 +129,7 @@ const Index = ({ products }) => {
 						</div>
 						<div className="flex-cc row gap-4 mt-4">
 							<div className="p-2 w-36 mt-10 rounded-xl text-white bg-white text-justify z-10">
-								<a href="">
+								<a href={`/checkout/${data?.user.email}`}>
 									<h1 className="text-xl font-bold text-center z-10">Checkout</h1>
 								</a>
 							</div>

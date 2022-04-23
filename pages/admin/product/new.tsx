@@ -6,6 +6,7 @@ import { Button, Form, Loader } from 'semantic-ui-react';
 import { useRouter } from 'next/router';
 import { ProductType } from '../../../@types/product';
 import MainLayout from '@components/_layouts/MainLayout';
+import 'semantic-ui-css/semantic.min.css';
 
 const NewProduct = () => {
 	const [form, setForm] = useState({

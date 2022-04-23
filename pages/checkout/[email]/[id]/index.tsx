@@ -3,18 +3,21 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
 import { Button, Form, Loader } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 import { useRouter } from 'next/router';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import MainLayout from '@components/_layouts/MainLayout';
 
-const NewAddress = () => {
+const EditAddress = ({ address }) => {
+	const { data } = useSession();
 	const [form, setForm] = useState({
-		namaLengkap: '',
-		noTelp: '',
-		kodePos: '',
-		jalan: '',
-		detailLain: '',
-		tandaiSebagai: '',
-		alamatUtama: true,
+		namaLengkap: address?.namaLengkap ?? '',
+		noTelp: address?.noTelp ?? '',
+		kodePos: address?.kodePos ?? '',
+		jalan: address?.jalan ?? '',
+		detailLain: address?.detailLain ?? '',
+		tandaiSebagai: address?.tandaiSebagai ?? '',
+		alamatUtama: false,
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [errors, setErrors] = useState<any>({
@@ -24,7 +27,7 @@ const NewAddress = () => {
 		jalan: '',
 		detailLain: '',
 		tandaiSebagai: '',
-		alamatUtama: true,
+		alamatUtama: false,
 	});
 	const router = useRouter();
 
@@ -33,24 +36,24 @@ const NewAddress = () => {
 			console.log('errors', errors);
 			if (Object.keys(errors).length === 0) {
 				console.log(form);
-				createAddress();
+				updateAddress();
 			} else {
 				setIsSubmitting(false);
 			}
 		}
 	}, [errors]);
 
-	const createAddress = async ({ query: { email } }) => {
+	const updateAddress = async () => {
 		try {
-			const res = await fetch(`http://localhost:3000/api/users/address/${email}`, {
-				method: 'POST',
+			const res = await fetch(`http://localhost:3000/api/users/address/${data?.user.email}/${router.query.id}`, {
+				method: 'PUT',
 				headers: {
 					Accept: 'application/json',
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify(form),
 			});
-			router.push('/admin/product');
+			router.push(`/checkout/${data?.user.email}`);
 		} catch (error) {
 			console.log(error);
 		}
@@ -58,10 +61,9 @@ const NewAddress = () => {
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault();
-
 		const errs = validate();
 		setErrors(errs);
-		setIsSubmitting(false);
+		setIsSubmitting(true);
 	};
 
 	const handleChange = (e) => {
@@ -83,9 +85,6 @@ const NewAddress = () => {
 
 		if (!form.namaLengkap) {
 			err.namaLengkap = 'Nama is required';
-		}
-		if (!form.jalan) {
-			err.jalan = 'Jalan is required';
 		}
 
 		return err;
@@ -226,4 +225,13 @@ const NewAddress = () => {
 	);
 };
 
-export default NewAddress;
+EditAddress.getInitialProps = async ({ query: { email, id } }) => {
+	const res = await fetch('http://localhost:3000/api/users/address');
+	const { data } = await res.json();
+	const obj = data.find((o) => o.email === email);
+	const address = obj.address.find((o) => o._id === id);
+
+	return { address: address };
+};
+
+export default EditAddress;
