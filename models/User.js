@@ -20,6 +20,7 @@ const UserSchema = new mongoose.Schema({
 			namaLengkap: String,
 			noTelp: String,
 			kodePos: String,
+			kota: String,
 			jalan: String,
 			detailLain: String,
 			tandaiSebagai: String,
