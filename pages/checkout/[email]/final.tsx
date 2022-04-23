@@ -7,9 +7,10 @@ import MainLayout from '@components/_layouts/MainLayout';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
-const Index = ({ products, address }) => {
+const Index = ({ products, address, provider }) => {
 	const { data } = useSession();
 	const router = useRouter();
+	console.log(provider);
 
 	const indexUtama = address.findIndex((item) => item?.alamatUtama === true);
 	const totalProduct = products.map((p) => p.price * p.quantity).reduce((a, b) => a + b, 0);
@@ -71,7 +72,7 @@ const Index = ({ products, address }) => {
 																{product.name}
 															</div>
 															<div className="text-xl text-gray-900 truncate">
-																Rp. {product.price}
+																Rp. {new Intl.NumberFormat('en-US').format(product?.price)}
 															</div>
 														</div>
 														<div className="absolute right-10 mt-10">
@@ -79,10 +80,7 @@ const Index = ({ products, address }) => {
 																x {product.quantity}
 															</div>
 														</div>
-													</div>
-
-													{/* <!-- Author - Category --> */}
-													
+													</div>													
 												</div>
 											))}
 										</div>
@@ -105,9 +103,18 @@ const Index = ({ products, address }) => {
 													</Link>
 												</div>
 											</div>
-											<div className="text-xl text-gray-900 truncate">
-												JNE
-											</div>
+											{!provider ? (
+												<div className="text-xl text-gray-500 truncate">Silakan Pilih Provider</div>
+											) : (
+												<div className="flex row flex-bs mt-3">
+													<div className="text-xl truncate">
+														{provider?.nama} - {provider?.layanan}
+													</div>
+													<div className="text-xl truncate">
+													Rp. {new Intl.NumberFormat('en-US').format(provider?.harga)}
+													</div>
+												</div>
+											)}
 										</div>
 										<div className='m-1 p-5 rounded-xl bg-gray-100'>
 											<div className="mb-2 text-xl font-semibold hover:underline truncate">
@@ -126,7 +133,7 @@ const Index = ({ products, address }) => {
 													Subtotal Produk
 												</div>
 												<div className="text-xl text-gray-900 truncate">
-													Rp. {totalProduct}
+													Rp. {new Intl.NumberFormat('en-US').format(totalProduct)}
 												</div>
 											</div>
 											<div className='flex flex-row flex-bs mb-1'>
@@ -134,7 +141,7 @@ const Index = ({ products, address }) => {
 													Subtotal Pengiriman
 												</div>
 												<div className="text-xl text-gray-900 truncate">
-													Rp. 10.000
+													Rp. {new Intl.NumberFormat('en-US').format(provider?.harga)}
 												</div>
 											</div>
 											<div className='flex flex-row flex-bs mb-1'>
@@ -142,7 +149,7 @@ const Index = ({ products, address }) => {
 													Total Pembayaran
 												</div>
 												<div className="text-xl text-gray-900 truncate">
-													Rp. 10.000
+													Rp. {new Intl.NumberFormat('en-US').format(provider?.harga + totalProduct)}
 												</div>
 											</div>
 										</div>
@@ -153,11 +160,11 @@ const Index = ({ products, address }) => {
 														Total Pembayaran
 													</div>
 													<div className="text-xl text-red-500 truncate">
-														Rp. 10.000
+														{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'IDR' }).format(provider?.harga + totalProduct)}
 													</div>
 												</div>
 												<div className="cursor-pointer hover:-translate-y-1 duration-300 mt-2" >
-													<Link href={'/checkout/new'}>
+													<Link href={''}>
 														<Button primary>Bayar</Button>
 													</Link>
 												</div>
@@ -179,8 +186,9 @@ Index.getInitialProps = async ({ query: { email } }) => {
 	const { data } = await res.json();
 	let obj = data.find((o) => o.email === email);
 	const address = obj.address;
+	const prov = obj.provider;
 	obj = obj.products;
 
-	return { products: obj, address: address };
+	return { products: obj, address: address, provider: prov };
 };
 export default Index;

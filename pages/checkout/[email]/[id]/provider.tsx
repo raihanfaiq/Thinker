@@ -47,7 +47,7 @@ const Index = ({ providers }) => {
 													{provider.nama} - {provider.layanan}
 												</div>
 												<div className="text-xl font-semibold truncate mt-1">
-													Rp. {provider.harga}
+													Rp. {new Intl.NumberFormat('en-US').format(provider?.harga)}
 												</div>
 											</div>
 											<div className="text-xl text-gray-600 truncate mt-1">

@@ -28,7 +28,7 @@ export default async (req: { query: { email: any; id: any; }; method: any; }, re
 		case 'GET':
 			try {
 				const user = await User.findOne({ email: email });
-				console.log(user);
+				// console.log(user);
 				const kotaUser = user.address.find((x: { id: any; }) => x.id === id).kota.toLowerCase();
 
 				const listJarak = jsonJarak.kota;

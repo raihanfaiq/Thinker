@@ -35,10 +35,8 @@ export default async (req, res) => {
 		
 		case 'PUT':
 			try {
-				console.log('HAIAIIAI');
 				const user = await User.findOne({ email: req.body.email });
 				user.provider = req.body.provider;
-				console.log(user);
 				await User.findByIdAndUpdate(user.id, user);
 				if (!user) {
 					return res.status(400).json({ success: false });
