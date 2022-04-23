@@ -1,3 +1,6 @@
+/* eslint-disable import/no-anonymous-default-export */
+/* eslint-disable no-empty */
+/* eslint-disable no-fallthrough */
 import dbConnect from '../../../../../utils/dbConnect';
 import User from '../../../../../models/User';
 import Product from '../../../../../models/Product';
