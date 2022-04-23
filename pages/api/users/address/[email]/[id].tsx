@@ -24,7 +24,7 @@ export default async (req, res) => {
 					user.address[itemIndex] = addressItem;
 					await User.findByIdAndUpdate(user.id, user);
 				}
-				return res.status(201).json({ success: true });
+				return res.status(201).json({ success: true, data: user });
 			} catch (err) {
 				console.log(err);
 				res.status(500).send('Something went wrong', err);

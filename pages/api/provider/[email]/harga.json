@@ -1,0 +1,19 @@
+{
+	"harga": [
+		{
+			"nama": "tiki",
+			"harga": 10,
+			"layanan": "reguler"
+		},
+		{
+			"nama": "tiki",
+			"harga": 20,
+			"layanan": "express"
+		},
+		{
+			"nama": "jne",
+			"harga": 11,
+			"layanan": "reguler"
+		}
+	]
+}
