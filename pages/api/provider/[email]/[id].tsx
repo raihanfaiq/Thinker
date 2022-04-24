@@ -5,7 +5,16 @@ import jsonJarak from './jarak.json';
 import jsonHarga from './harga.json';
 dbConnect();
 
-export default async (req: { query: { email: any; id: any; }; method: any; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { success: boolean; data?: any; error?: any; }): void; new(): any; }; }; }) => {
+export default async (
+	req: { query: { email: any; id: any }; method: any },
+	res: {
+		status: (arg0: number) => {
+			(): any;
+			new (): any;
+			json: { (arg0: { success: boolean; data?: any; error?: any }): void; new (): any };
+		};
+	}
+) => {
 	const {
 		query: { email, id },
 		method,
@@ -29,15 +38,23 @@ export default async (req: { query: { email: any; id: any; }; method: any; }, re
 			try {
 				const user = await User.findOne({ email: email });
 				// console.log(user);
-				const kotaUser = user.address.find((x: { id: any; }) => x.id === id).kota.toLowerCase();
+				const kotaUser = user.address
+					.find((x: { id: any }) => x.id === id)
+					.kota.toLowerCase();
 
 				const listJarak = jsonJarak.kota;
 				// console.log(listJarak[0].nama);
-				const jarak = listJarak.find((x: { nama: any; }) => x.nama === kotaUser).jarak;
-				const biaya = jsonHarga;
+				const jarak = listJarak.find((x: { nama: any }) => x.nama === kotaUser).jarak;
+				// let biaya = Object.assign({}, jsonHarga);
+				// var biaya = $.extend(true, {}, jsonHarga);
+				// let biaya = Object.create(jsonHarga);
+				// var biaya = _.clone(jsonHarga);
+				let biaya = JSON.parse(JSON.stringify(jsonHarga));
 				for (let i = 0; i < biaya.harga.length; i++) {
 					biaya.harga[i].harga = biaya.harga[i].harga * jarak;
 				}
+				console.log('biaya', biaya);
+				console.log('jsonharga', jsonHarga);
 				res.status(200).json({ success: true, data: biaya });
 			} catch (error) {
 				res.status(400).json({ success: false, error: error.message });
