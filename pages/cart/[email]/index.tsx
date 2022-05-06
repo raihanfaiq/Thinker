@@ -58,7 +58,7 @@ const Index = ({ products }) => {
 			<MainLayout title="New Product">
 				<section className="container">
 					<div className="flex flex-cc col">
-						<h1 className="text-4xl z-20 my-10 flex-cc text-white">My Cart</h1>
+						<h1 className="text-4xl z-20 my-10 flex-cc text-white">Cart Saya</h1>
 						<div className="grid grid-cols-3 gap-4 z-20">
 							{products.map((product) => {
 								return (

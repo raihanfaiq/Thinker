@@ -11,6 +11,7 @@
 		"format": "prettier -w ."
 	},
 	"dependencies": {
+		"@paypal/react-paypal-js": "^7.6.0",
 		"isomorphic-unfetch": "^3.1.0",
 		"mdi-react": "^8.2.0",
 		"mongoose": "^6.2.4",

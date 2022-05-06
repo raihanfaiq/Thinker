@@ -1,7 +1,4 @@
 import mongoose from 'mongoose';
-import { loadGetInitialProps } from 'next/dist/shared/lib/utils';
-import { Md10K } from 'react-icons/md';
-const Schema = mongoose.Schema;
 
 const ProductSchema = new mongoose.Schema({
 	name: {

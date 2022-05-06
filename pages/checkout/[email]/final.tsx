@@ -5,15 +5,114 @@ import fetch from 'isomorphic-unfetch';
 import { Button, Card } from 'semantic-ui-react';
 import MainLayout from '@components/_layouts/MainLayout';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { PayPalScriptProvider, PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const Index = ({ products, address, provider }) => {
 	const { data } = useSession();
 	const router = useRouter();
-	console.log(provider);
 
 	const indexUtama = address.findIndex((item) => item?.alamatUtama === true);
 	const totalProduct = products.map((p) => p.price * p.quantity).reduce((a, b) => a + b, 0);
+	const amount = Math.round((provider?.harga + totalProduct) / 14477);
+
+	// This values are the props in the UI
+	// const amount = 2;
+	const currency = 'USD';
+	const style = {'layout':'vertical'};
+
+	// Custom component to wrap the PayPalButtons and handle currency changes
+	const ButtonWrapper = ({ currency, showSpinner }) => {
+		// usePayPalScriptReducer can be use only inside children of PayPalScriptProviders
+		// This is the main reason to wrap the PayPalButtons in a new component
+		const [{ options, isPending }, dispatch] = usePayPalScriptReducer();
+
+		useEffect(() => {
+			dispatch({
+				type: 'resetOptions',
+				value: {
+					...options,
+					currency: currency,
+				},
+			});
+		}, [currency, showSpinner]);
+
+		return (<>
+			{ (showSpinner && isPending) && <div className="spinner" /> }
+			<PayPalButtons
+				style={{ layout: 'horizontal' }}
+				disabled={false}
+				forceReRender={[amount, currency, style]}
+				fundingSource={undefined}
+				createOrder={(data, actions) => {
+					return actions.order
+						.create({
+							purchase_units: [
+								{
+									amount: {
+										currency_code: currency,
+										value: amount,
+									},
+								},
+							],
+						})
+						.then(async (orderId) => {
+							// Your code here after create the order
+							const form = {
+								orderId: orderId,
+								status: 'Belum Dibayar',
+								products: products,
+							};
+							console.log('order created', form);
+							
+							try {
+								const res = await fetch('http://localhost:3000/api/orders', {
+									method: 'POST',
+									headers: {
+										Accept: 'application/json',
+										'Content-Type': 'application/json',
+									},
+									body: JSON.stringify(form),
+								});
+							} catch (error) {
+								console.log(error);
+							}
+							return orderId;
+						});
+				}}
+				onApprove={function (data, actions) {
+					return actions.order.capture().then(async function () {
+						// Your code here after capture the order
+						const form = {
+							orderId: data.orderID,
+							status: 'Pesanan Diproses',
+							products: products,
+						};
+						try {
+							const response = await fetch('http://localhost:3000/api/orders');
+							const { orders } = await response.json();
+							const orderId = orders.find((order) => order.orderId === data.orderID)?._id;
+							console.log(orderId);
+							const res = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
+								method: 'PUT',
+								headers: {
+									Accept: 'application/json',
+									'Content-Type': 'application/json',
+								},
+								body: JSON.stringify(form),
+							});
+							router.push('/order');
+						} catch (error) {
+							console.log(error);
+						}
+						console.log('order captured', data);
+					});
+				}}
+			/>
+		</>
+		);
+	};
 
 	return (
 		<div className="bg-sky">
@@ -164,9 +263,12 @@ const Index = ({ products, address, provider }) => {
 													</div>
 												</div>
 												<div className="cursor-pointer hover:-translate-y-1 duration-300 mt-2" >
-													<Link href={''}>
-														<Button primary>Bayar</Button>
-													</Link>
+													<PayPalScriptProvider options={{ 'client-id': 'ARZpwYsgjRLQTsLPcJmOX1tdaf4CDWhQMqSdXTQ_LwXh8GoTakfM6_271JeaDzp9gQywFahsoS3FK0qJ' }}>
+														<ButtonWrapper
+															currency={currency}
+															showSpinner={false}
+														/>
+													</PayPalScriptProvider>
 												</div>
 											</div>
 										</div>

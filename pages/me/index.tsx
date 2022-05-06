@@ -39,7 +39,7 @@ export default function MePage() {
 
 										{/* <!-- Author - Category --> */}
 										<Link href={`/cart/${data?.user.email}`}>
-											<Button primary>View Cart</Button>
+											<Button primary>Lihat Cart</Button>
 										</Link>
 									</div>
 								</div>
