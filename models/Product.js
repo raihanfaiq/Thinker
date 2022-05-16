@@ -9,7 +9,7 @@ const ProductSchema = new mongoose.Schema({
 	description: String,
 	category: {
 		type: String,
-		enum: ['Softcopy', 'Hardcopy'],
+		enum: ['Softcopy', 'Hardcopy', 'Konsultasi'],
 		default: 'Softcopy',
 	},
 	price: Number,
@@ -18,6 +18,7 @@ const ProductSchema = new mongoose.Schema({
 		default: 0,
 	},
 	kelas: Number,
+	jurusan: String,
 	kodeJenis: String,
 	kodeMateri: String,
 	mataPelajaran: String,
@@ -38,7 +39,7 @@ const ProductSchema = new mongoose.Schema({
 	views: {
 		type: Number,
 		default: 1,
-	}
+	},
 });
 
 export default mongoose.models.Product || mongoose.model('Product', ProductSchema);

@@ -61,10 +61,24 @@ const Product = ({ product }) => {
 		const image = product.linkGambar;
 		const price = product.price;
 		const name = product.name;
+		const category = product.category;
+		const kodeJenis = product.kodeJenis;
+		const kelas = product.kelas;
+		const jurusan = product.jurusan;
 
 		const response = await fetch(`/api/cart/${productId}`, {
 			method: 'PUT',
-			body: JSON.stringify({ userEmail, quantity: 1, image, price, name }),
+			body: JSON.stringify({
+				userEmail,
+				quantity: 1,
+				image,
+				price,
+				name,
+				category,
+				kodeJenis,
+				kelas,
+				jurusan,
+			}),
 		});
 		const data = await response.json();
 		console.log(data);

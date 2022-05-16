@@ -13,6 +13,7 @@ const NewAddress = () => {
 	const [form, setForm] = useState({
 		namaLengkap: '',
 		noTelp: '',
+		email: '',
 		kodePos: '',
 		jalan: '',
 		kota: '',
@@ -24,6 +25,7 @@ const NewAddress = () => {
 	const [errors, setErrors] = useState<any>({
 		namaLengkap: '',
 		noTelp: '',
+		email: '',
 		kodePos: '',
 		jalan: '',
 		kota: '',
@@ -112,9 +114,9 @@ const NewAddress = () => {
 											error={
 												errors.namaLengkap
 													? {
-														content: 'Please enter a name',
-														pointing: 'below',
-												  }
+															content: 'Please enter a name',
+															pointing: 'below',
+													  }
 													: null
 											}
 											placeholder="Nama Lengkap"
@@ -126,17 +128,34 @@ const NewAddress = () => {
 									<div className="mb-3">
 										<Form.Input
 											fluid
-											placeholder="No Telepon / email"
+											placeholder="No Telepon"
 											name="noTelp"
 											error={
 												errors.noTelp
 													? {
-														content: 'Please enter a noTelp',
-														pointing: 'below',
-												  }
+															content: 'Please enter a noTelp',
+															pointing: 'below',
+													  }
 													: null
 											}
 											value={form.noTelp}
+											onChange={handleChange}
+										/>
+									</div>
+									<div className="mb-3">
+										<Form.Input
+											fluid
+											placeholder="Email"
+											name="email"
+											error={
+												errors.noTelp
+													? {
+															content: 'Please enter an email',
+															pointing: 'below',
+													  }
+													: null
+											}
+											value={form.email}
 											onChange={handleChange}
 										/>
 									</div>
@@ -147,9 +166,9 @@ const NewAddress = () => {
 											error={
 												errors.kota
 													? {
-														content: 'Please enter a kota',
-														pointing: 'below',
-												  }
+															content: 'Please enter a kota',
+															pointing: 'below',
+													  }
 													: null
 											}
 											placeholder="Kota"
@@ -164,9 +183,9 @@ const NewAddress = () => {
 											error={
 												errors.jalan
 													? {
-														content: 'Please enter a name',
-														pointing: 'below',
-												  }
+															content: 'Please enter a name',
+															pointing: 'below',
+													  }
 													: null
 											}
 											placeholder="Nama Jalan, Gedung, No. rumah"
@@ -183,9 +202,9 @@ const NewAddress = () => {
 											error={
 												errors.kodePos
 													? {
-														content: 'Please enter a kodePos',
-														pointing: 'below',
-												  }
+															content: 'Please enter a kodePos',
+															pointing: 'below',
+													  }
 													: null
 											}
 											value={form.kodePos}
@@ -200,9 +219,9 @@ const NewAddress = () => {
 											error={
 												errors.detailLain
 													? {
-														content: 'Please enter a detailLain',
-														pointing: 'below',
-												  }
+															content: 'Please enter a detailLain',
+															pointing: 'below',
+													  }
 													: null
 											}
 											value={form.detailLain}

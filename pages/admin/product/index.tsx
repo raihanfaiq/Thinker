@@ -10,7 +10,7 @@ const Index = ({ products }) => {
 			<MainLayout title="New Product">
 				<section className="container">
 					<div className="flex flex-cc col">
-						<h1 className="text-4xl z-20 my-10 flex-cc text-white">products</h1>
+						<h1 className="text-4xl z-20 my-10 flex-cc text-white">Produk</h1>
 						<div className="grid grid-cols-3 gap-4 z-20">
 							{products.map((product) => {
 								return (
@@ -53,10 +53,10 @@ const Index = ({ products }) => {
 							})}
 						</div>
 						<div className="flex-cc row gap-4 mt-4">
-							<div className="p-2 w-36 mt-10 rounded-xl text-white bg-gradient-to-bl from-sky text-justify z-10">
+							<div className="p-2 w-200 mt-10 rounded-xl text-white bg-gradient-to-bl from-sky text-justify z-10">
 								<a href="product/new">
 									<h1 className="text-xl font-bold text-center z-10">
-										Buat Produk
+										<Button primary>Buat Produk</Button>
 									</h1>
 								</a>
 							</div>

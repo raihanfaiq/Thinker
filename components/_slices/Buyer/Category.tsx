@@ -4,32 +4,36 @@ const Category = (): JSX.Element => {
 			<div className="bg-whitesky min-h-[450px] rounded-2xl p-10 shadow-2xl">
 				<h1 className="text-4xl font-bold text-center z-10">Produk</h1>
 				<div className="grid grid-cols-2 flex items-center justify-center">
-					<div className="grid grid-cols-3 bg-blue-300 rounded-2xl shadow-lg my-5 mx-5 justify-">
-						<div className="flex-cc">
-							<a href="#">
-								<img src="/icon/book.svg" alt="" className="" />
-							</a>
+					<a href="/product">
+						<div className="grid grid-cols-3 bg-blue-300 rounded-2xl shadow-lg my-5 mx-5 justify-">
+							<div className="flex-cc">
+								<a href="#">
+									<img src="/icon/book.svg" alt="" className="" />
+								</a>
+							</div>
+							<div className="flex-cc col gap-4 p-10 col-span-2">
+								<h1 className="text-2xl text-center font-bold">Materi Pelajaran</h1>
+								<h1 className="text-lg text-center z-10">
+									Cari materi pelajaran yang kamu inginkan di sini
+								</h1>
+							</div>
 						</div>
-						<div className="flex-cc col gap-4 p-10 col-span-2">
-							<h1 className="text-2xl text-center font-bold">Materi Pelajaran</h1>
-							<h1 className="text-lg text-center z-10">
-								Cari materi pelajaran yang kamu inginkan di sini
-							</h1>
+					</a>
+					<a href="/product">
+						<div className="grid grid-cols-3 bg-blue-300 rounded-2xl shadow-lg my-5 mx-5">
+							<div className="flex-cc">
+								<a href="#">
+									<img src="/icon/sertif.svg" alt="" className="" />
+								</a>
+							</div>
+							<div className="flex-cc col gap-4 p-10 col-span-2">
+								<h1 className="text-2xl text-center font-bold">Kumpulan Soal</h1>
+								<h1 className="text-lg text-center z-10">
+									Cari soal beserta jawabannya di sini
+								</h1>
+							</div>
 						</div>
-					</div>
-					<div className="grid grid-cols-3 bg-blue-300 rounded-2xl shadow-lg my-5 mx-5">
-						<div className="flex-cc">
-							<a href="#">
-								<img src="/icon/sertif.svg" alt="" className="" />
-							</a>
-						</div>
-						<div className="flex-cc col gap-4 p-10 col-span-2">
-							<h1 className="text-2xl text-center font-bold">Kumpulan Soal</h1>
-							<h1 className="text-lg text-center z-10">
-								Cari soal beserta jawabannya di sini
-							</h1>
-						</div>
-					</div>
+					</a>
 					<div className="bg-blue-300 rounded-2xl shadow-lg my-5 mx-5 col-span-2 flex justify-items-center overflow-auto">
 						<div className="flex-cc ml-auto">
 							<a href="#">

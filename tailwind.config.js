@@ -32,11 +32,11 @@ module.exports = {
 				'-sm': { raw: '(max-width: 639px)' },
 			},
 			backgroundImage: {
-				'space': 'url(/icon/space.svg)',
-				'ground': 'url(/icon/ground.svg)',
+				space: 'url(/icon/space.svg)',
+				ground: 'url(/icon/ground.svg)',
 			},
 			animation: {
-				'rocket': 'wiggle 3s linear infinite alternate',
+				rocket: 'wiggle 3s linear infinite alternate',
 			},
 			keyframes: {
 				wiggle: {
@@ -49,7 +49,7 @@ module.exports = {
 					'100%': {
 						transform: 'translateX(-50%)',
 					},
-				}
+				},
 			},
 		},
 	},

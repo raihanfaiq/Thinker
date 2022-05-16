@@ -13,6 +13,7 @@ const EditAddress = ({ address }) => {
 	const [form, setForm] = useState({
 		namaLengkap: address?.namaLengkap ?? '',
 		noTelp: address?.noTelp ?? '',
+		email: address?.email ?? '',
 		kodePos: address?.kodePos ?? '',
 		kota: address?.kota ?? '',
 		jalan: address?.jalan ?? '',
@@ -24,6 +25,7 @@ const EditAddress = ({ address }) => {
 	const [errors, setErrors] = useState<any>({
 		namaLengkap: '',
 		noTelp: '',
+		email: '',
 		kodePos: '',
 		jalan: '',
 		kota: '',
@@ -47,14 +49,17 @@ const EditAddress = ({ address }) => {
 
 	const updateAddress = async () => {
 		try {
-			const res = await fetch(`http://localhost:3000/api/users/address/${data?.user.email}/${router.query.id}`, {
-				method: 'PUT',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify(form),
-			});
+			const res = await fetch(
+				`http://localhost:3000/api/users/address/${data?.user.email}/${router.query.id}`,
+				{
+					method: 'PUT',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(form),
+				}
+			);
 			router.push(`/checkout/${data?.user.email}`);
 		} catch (error) {
 			console.log(error);
@@ -112,9 +117,9 @@ const EditAddress = ({ address }) => {
 											error={
 												errors.namaLengkap
 													? {
-														content: 'Please enter a name',
-														pointing: 'below',
-												  }
+															content: 'Please enter a name',
+															pointing: 'below',
+													  }
 													: null
 											}
 											placeholder="Nama Lengkap"
@@ -131,12 +136,29 @@ const EditAddress = ({ address }) => {
 											error={
 												errors.noTelp
 													? {
-														content: 'Please enter a noTelp',
-														pointing: 'below',
-												  }
+															content: 'Please enter a noTelp',
+															pointing: 'below',
+													  }
 													: null
 											}
 											value={form.noTelp}
+											onChange={handleChange}
+										/>
+									</div>
+									<div className="mb-3">
+										<Form.Input
+											fluid
+											placeholder="Email"
+											name="email"
+											error={
+												errors.email
+													? {
+															content: 'Please enter an email',
+															pointing: 'below',
+													  }
+													: null
+											}
+											value={form.email}
 											onChange={handleChange}
 										/>
 									</div>
@@ -147,9 +169,9 @@ const EditAddress = ({ address }) => {
 											error={
 												errors.kota
 													? {
-														content: 'Please enter a kota',
-														pointing: 'below',
-												  }
+															content: 'Please enter a kota',
+															pointing: 'below',
+													  }
 													: null
 											}
 											placeholder="Kota"
@@ -164,9 +186,9 @@ const EditAddress = ({ address }) => {
 											error={
 												errors.jalan
 													? {
-														content: 'Please enter a name',
-														pointing: 'below',
-												  }
+															content: 'Please enter a name',
+															pointing: 'below',
+													  }
 													: null
 											}
 											placeholder="Nama Jalan, Gedung, No. rumah"
@@ -183,9 +205,9 @@ const EditAddress = ({ address }) => {
 											error={
 												errors.kodePos
 													? {
-														content: 'Please enter a kodePos',
-														pointing: 'below',
-												  }
+															content: 'Please enter a kodePos',
+															pointing: 'below',
+													  }
 													: null
 											}
 											value={form.kodePos}
@@ -200,9 +222,9 @@ const EditAddress = ({ address }) => {
 											error={
 												errors.detailLain
 													? {
-														content: 'Please enter a detailLain',
-														pointing: 'below',
-												  }
+															content: 'Please enter a detailLain',
+															pointing: 'below',
+													  }
 													: null
 											}
 											value={form.detailLain}

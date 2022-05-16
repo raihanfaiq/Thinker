@@ -18,6 +18,10 @@ export default async (req, res) => {
 	const image = obj.image;
 	const price = obj.price;
 	const name = obj.name;
+	const category = obj.category;
+	const kodeJenis = obj.kodeJenis;
+	const kelas = obj.kelas;
+	const jurusan = obj.jurusan;
 
 	switch (method) {
 		case 'PUT':
@@ -36,7 +40,17 @@ export default async (req, res) => {
 					await User.findByIdAndUpdate(user.id, user);
 				} else {
 					//product does not exists in user, add new item
-					user.products.push({ productId: id, quantity, image, price, name });
+					user.products.push({
+						productId: id,
+						quantity,
+						image,
+						price,
+						name,
+						category: category,
+						kodeJenis: kodeJenis,
+						kelas: kelas,
+						jurusan: jurusan,
+					});
 					await User.findByIdAndUpdate(user.id, user);
 				}
 				return res.status(201).json({ success: true });

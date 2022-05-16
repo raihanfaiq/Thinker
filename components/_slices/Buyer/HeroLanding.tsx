@@ -27,14 +27,14 @@ const HeroLanding = (): JSX.Element => {
 									<div className="p-2 w-36 rounded-xl border-2 border-black bg-gradient-to-bl from-sky text-justify z-10">
 										<a href="/api/auth/signin">
 											<h1 className="text-xl font-bold text-center z-10">
-												daftar
+												Daftar
 											</h1>
 										</a>
 									</div>
 									<div className="p-2 w-36 rounded-xl border-2 border-black bg-gradient-to-bl from-blue text-justify z-10">
 										<a href="/api/auth/signin">
 											<h1 className="text-xl font-bold text-center z-10">
-												login
+												Login
 											</h1>
 										</a>
 									</div>

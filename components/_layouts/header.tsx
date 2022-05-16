@@ -28,13 +28,15 @@ export default function Header() {
 				</noscript>
 				<div className="mt-4 flex-cc z-40 ml-52">
 					<Link href="/" className="px-4 py-2 text-white text-xl hover:bg-opacity-80">
-						Home
+						Beranda
 					</Link>
 					<Link
-						href={session?.user.name === 'thinkeradmmin' ? '/admin/product' : '/product'}
+						href={
+							session?.user.name === 'thinkeradmmin' ? '/admin/product' : '/product'
+						}
 						className="px-4 py-2 text-white text-xl hover:bg-opacity-80"
 					>
-						Product
+						Produk
 					</Link>
 					<Link
 						href="/about"
@@ -62,7 +64,7 @@ export default function Header() {
 										signIn('auth0');
 									}}
 								>
-									Sign in
+									Masuk
 								</a>
 							</>
 						)}
@@ -88,7 +90,7 @@ export default function Header() {
 										signOut();
 									}}
 								>
-									Sign out
+									Keluar
 								</a>
 							</>
 						)}

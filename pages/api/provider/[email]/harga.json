@@ -3,17 +3,20 @@
 		{
 			"nama": "tiki",
 			"harga": 10,
-			"layanan": "reguler"
+			"layanan": "reguler",
+			"lama": 2
 		},
 		{
 			"nama": "tiki",
 			"harga": 20,
-			"layanan": "express"
+			"layanan": "express",
+			"lama": 1
 		},
 		{
 			"nama": "jne",
 			"harga": 11,
-			"layanan": "reguler"
+			"layanan": "reguler",
+			"lama": 2
 		}
 	]
 }

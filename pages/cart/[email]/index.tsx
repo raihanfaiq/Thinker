@@ -58,7 +58,7 @@ const Index = ({ products }) => {
 			<MainLayout title="New Product">
 				<section className="container">
 					<div className="flex flex-cc col">
-						<h1 className="text-4xl z-20 my-10 flex-cc text-white">Cart Saya</h1>
+						<h1 className="text-4xl z-20 my-10 flex-cc text-white">Keranjang Saya</h1>
 						<div className="grid grid-cols-3 gap-4 z-20">
 							{products.map((product) => {
 								return (
@@ -75,12 +75,52 @@ const Index = ({ products }) => {
 														<Link
 															href={`/product/${product.productId}`}
 														>
+															<a>
+																{product.kodeJenis === 'J01' && (
+																	<a>
+																		Materi Pelajaran{' '}
+																		{product.kelas > 1 && (
+																			<a>{product.kelas}</a>
+																		)}{' '}
+																		{product.jurusan !==
+																			'semua' && (
+																			<a>{product.jurusan}</a>
+																		)}
+																	</a>
+																)}
+																{product.kodeJenis === 'J02' && (
+																	<a>
+																		Kumpulan Soal{' '}
+																		{product.kelas > 1 && (
+																			<a>{product.kelas}</a>
+																		)}{' '}
+																		{product.jurusan !==
+																			'semua' && (
+																			<a>{product.jurusan}</a>
+																		)}
+																	</a>
+																)}
+																{product.kodeJenis === 'J03' && (
+																	<a>
+																		Konsultasi{' '}
+																		{product.kelas > 1 && (
+																			<a>{product.kelas}</a>
+																		)}{' '}
+																		{product.jurusan !==
+																			'semua' && (
+																			<a>{product.jurusan}</a>
+																		)}
+																	</a>
+																)}{' '}
+															</a>
+														</Link>
+														<Link href={`/product/${product._id}`}>
 															<a>{product.name}</a>
 														</Link>
 
 														<div className="pt-1 flex row justify-between">
 															<div className="text-xl mt-2">
-																Quantity
+																Jumlah
 															</div>
 															<div className="flex row">
 																<Button
@@ -104,9 +144,21 @@ const Index = ({ products }) => {
 															</div>
 														</div>
 														<div className="pt-5 flex row justify-between">
-															<div className="text-xl">Price</div>
+															<div className="text-xl">Harga</div>
 															<div className="text-xl">
-																{product.price * product.quantity}
+																Rp
+																{(product.price * product.quantity)
+																	.toString()
+																	.replace(
+																		/\B(?=(\d{3})+(?!\d))/g,
+																		'.'
+																	)}
+																,00
+															</div>
+														</div>
+														<div className="pt-5 flex row justify-between">
+															<div className="text-xl">
+																{product.category}
 															</div>
 														</div>
 														<div className="pt-5 flex row">
@@ -116,7 +168,7 @@ const Index = ({ products }) => {
 																	deleteButton(product)
 																}
 															>
-																Delete
+																Hapus
 															</Button>
 														</div>
 													</div>

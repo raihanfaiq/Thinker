@@ -24,6 +24,7 @@ const NewProduct = () => {
 		rating: 0,
 		stok: 0,
 		terjual: 0,
+		jurusan: '',
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [errors, setErrors] = useState<ProductType>({
@@ -114,6 +115,18 @@ const NewProduct = () => {
 			category: category,
 		});
 	};
+	const handleChangeKelas = (kelas: number) => {
+		setForm({
+			...form,
+			kelas: kelas,
+		});
+	};
+	const handleChangeJurusan = (jurusan: string) => {
+		setForm({
+			...form,
+			jurusan: jurusan,
+		});
+	};
 
 	const validate = () => {
 		const err: ProductType = {};
@@ -124,9 +137,9 @@ const NewProduct = () => {
 		if (!form.description) {
 			err.description = 'Description is required';
 		}
-		// if (!form.price) {
-		// 	err.price = 'Price is required';
-		// }
+		if (!form.price) {
+			err.price = 'Price is required';
+		}
 		// if (!form.kelas) {
 		// 	err.kelas = 'kelas is required';
 		// }
@@ -162,14 +175,13 @@ const NewProduct = () => {
 							<div className="z-20 w-1/2 bg-gradient-to-bl from-sky shadow-2xl p-10 rounded-2xl mt-10">
 								<h1 className="text-4xl z-20 my-10 flex-cc">Create Product</h1>
 								<Form onSubmit={handleSubmit}>
-									<h3>Name</h3>
+									<h3>Nama</h3>
 									<Form.Input
-										fluid
 										error={
 											errors.name
 												? {
-													content: 'Please enter a name',
-													pointing: 'below',
+														content: 'Please enter a name',
+														pointing: 'below',
 												  }
 												: null
 										}
@@ -178,23 +190,22 @@ const NewProduct = () => {
 										value={form.name}
 										onChange={handleChange}
 									/>
-									<h3>Description</h3>
+									<h3>Deskripsi</h3>
 									<Form.TextArea
-										fluid
 										placeholder="Description"
 										name="description"
 										error={
 											errors.description
 												? {
-													content: 'Please enter a description',
-													pointing: 'below',
+														content: 'Please enter a description',
+														pointing: 'below',
 												  }
 												: null
 										}
 										value={form.description}
 										onChange={handleChange}
 									/>
-									<h3>Category</h3>
+									<h3>Kategori</h3>
 									<Form.Radio
 										label="Softcopy"
 										name="softcopy"
@@ -207,13 +218,19 @@ const NewProduct = () => {
 										value={form.category}
 										onChange={(e) => handleChangeCategory('Hardcopy')}
 									/>
-									<h3>Price</h3>
+									<Form.Radio
+										label="Konsultasi"
+										name="konsultasi"
+										value={form.category}
+										onChange={(e) => handleChangeCategory('Konsultasi')}
+									/>
+									<h3>Harga</h3>
 									<Form.Input
 										error={
 											errors.price
 												? {
-													content: 'Please enter a price',
-													pointing: 'below',
+														content: 'Please enter a price',
+														pointing: 'below',
 												  }
 												: null
 										}
@@ -223,12 +240,55 @@ const NewProduct = () => {
 										onChange={handleChange}
 									/>
 									<h3>Kelas</h3>
-									<Form.Input
+									<Form.Radio
+										label="10"
+										name="10"
+										value={form.kelas}
+										onChange={(e) => handleChangeKelas(10)}
+									/>
+									<Form.Radio
+										label="11"
+										name="11"
+										value={form.kelas}
+										onChange={(e) => handleChangeKelas(11)}
+									/>
+									<Form.Radio
+										label="12"
+										name="12"
+										value={form.kelas}
+										onChange={(e) => handleChangeKelas(12)}
+									/>
+									<Form.Radio
+										label="Semua"
+										name="semua"
+										value={form.kelas}
+										onChange={(e) => handleChangeKelas(0)}
+									/>
+									<h3>Jurusan</h3>
+									<Form.Radio
+										label="IPA"
+										name="IPA"
+										value={form.jurusan}
+										onChange={(e) => handleChangeJurusan('IPA')}
+									/>
+									<Form.Radio
+										label="IPS"
+										name="IPS"
+										value={form.jurusan}
+										onChange={(e) => handleChangeJurusan('IPS')}
+									/>
+									<Form.Radio
+										label="Semua"
+										name="semua"
+										value={form.jurusan}
+										onChange={(e) => handleChangeJurusan('semua')}
+									/>
+									{/* <Form.Input
 										error={
 											errors.kelas
 												? {
-													content: 'Please enter a kelas',
-													pointing: 'below',
+														content: 'Please enter a kelas',
+														pointing: 'below',
 												  }
 												: null
 										}
@@ -236,14 +296,14 @@ const NewProduct = () => {
 										name="kelas"
 										value={form.kelas}
 										onChange={handleChange}
-									/>
+									/> */}
 									<h3>Kode Jenis</h3>
 									<Form.Input
 										error={
 											errors.kodeJenis
 												? {
-													content: 'Please enter a kodeJenis',
-													pointing: 'below',
+														content: 'Please enter a kodeJenis',
+														pointing: 'below',
 												  }
 												: null
 										}
@@ -257,8 +317,8 @@ const NewProduct = () => {
 										error={
 											errors.kodeMateri
 												? {
-													content: 'Please enter a kodeMateri',
-													pointing: 'below',
+														content: 'Please enter a kodeMateri',
+														pointing: 'below',
 												  }
 												: null
 										}
@@ -272,8 +332,8 @@ const NewProduct = () => {
 										error={
 											errors.mataPelajaran
 												? {
-													content: 'Please enter a mataPelajaran',
-													pointing: 'below',
+														content: 'Please enter a mataPelajaran',
+														pointing: 'below',
 												  }
 												: null
 										}
@@ -287,8 +347,8 @@ const NewProduct = () => {
 										error={
 											errors.penilaian
 												? {
-													content: 'Please enter a penilaian',
-													pointing: 'below',
+														content: 'Please enter a penilaian',
+														pointing: 'below',
 												  }
 												: null
 										}
@@ -302,8 +362,8 @@ const NewProduct = () => {
 										error={
 											errors.stok
 												? {
-													content: 'Please enter a stok',
-													pointing: 'below',
+														content: 'Please enter a stok',
+														pointing: 'below',
 												  }
 												: null
 										}
@@ -317,8 +377,8 @@ const NewProduct = () => {
 										error={
 											errors.terjual
 												? {
-													content: 'Please enter a terjual',
-													pointing: 'below',
+														content: 'Please enter a terjual',
+														pointing: 'below',
 												  }
 												: null
 										}
@@ -329,7 +389,7 @@ const NewProduct = () => {
 									/>
 									<div>
 										<Button as="label" htmlFor="file" type="button">
-											Upload image
+											Unggah Gambar
 										</Button>
 										<input
 											type="file"
@@ -338,9 +398,9 @@ const NewProduct = () => {
 											style={{ display: 'hidden' }}
 										/>
 									</div>
-									<div className="">
+									<div className="pt-4">
 										<Button basic color="blue" type="submit">
-											Create
+											Buat
 										</Button>
 									</div>
 								</Form>

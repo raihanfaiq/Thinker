@@ -13,12 +13,21 @@ const UserSchema = new mongoose.Schema({
 			price: Number,
 			name: String,
 			quantity: Number,
+			category: {
+				type: String,
+				enum: ['Softcopy', 'Hardcopy'],
+				default: 'Softcopy',
+			},
+			kodeJenis: String,
+			kelas: Number,
+			jurusan: String,
 		},
 	],
 	address: [
 		{
 			namaLengkap: String,
 			noTelp: String,
+			email: String,
 			kodePos: String,
 			kota: String,
 			jalan: String,
