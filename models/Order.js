@@ -12,6 +12,7 @@ const OrderSchema = new mongoose.Schema({
 			quantity: Number,
 		},
 	],
+	email: String,
 });
 
 export default mongoose.models.Order || mongoose.model('Order', OrderSchema);

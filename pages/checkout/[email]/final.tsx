@@ -19,7 +19,14 @@ const Index = ({ products, address, provider, hardcopy, softcopy, konsultasi, em
 
 	const indexUtama = address.findIndex((item) => item?.alamatUtama === true);
 	const totalProduct = products.map((p) => p.price * p.quantity).reduce((a, b) => a + b, 0);
-	const amount = Math.round((provider?.harga + totalProduct) / 14477);
+	let amount = Math.round((provider?.harga + totalProduct) / 14477);
+	if (hardcopy && !(softcopy || konsultasi)) {
+		amount = Math.round((provider?.harga + totalProduct) / 14477);
+	} else if (!hardcopy && (softcopy || konsultasi)) {
+		amount = Math.round((1000 + totalProduct) / 14477);
+	} else if (!hardcopy && !(softcopy || konsultasi)) {
+		amount = Math.round((1000 + totalProduct) / 14477);
+	}
 
 	// This values are the props in the UI
 	// const amount = 2;
@@ -68,6 +75,7 @@ const Index = ({ products, address, provider, hardcopy, softcopy, konsultasi, em
 									orderId: orderId,
 									status: 'Belum Dibayar',
 									products: products,
+									email: email,
 								};
 								console.log('order created', form);
 
@@ -112,7 +120,7 @@ const Index = ({ products, address, provider, hardcopy, softcopy, konsultasi, em
 										body: JSON.stringify(form),
 									}
 								);
-								router.push('/order');
+								router.push(`/order/${email}`);
 							} catch (error) {
 								console.log(error);
 							}
