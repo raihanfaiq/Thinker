@@ -73,33 +73,40 @@ const NewProduct = () => {
 	};
 
 	const handleSubmit = async (e: any) => {
+		//kalo mau pake upload file
+		// e.preventDefault();
+
+		// const Form = e.currentTarget;
+		// const fileInput = Array.from(Form.elements).find(({ name }) => name === 'file');
+
+		// const formData = new FormData();
+
+		// for (const file of fileInput.files) {
+		// 	formData.append('file', file);
+		// }
+
+		// formData.append('upload_preset', 'thinker');
+
+		// const data = await fetch('https://api.cloudinary.com/v1_1/cloud51/image/upload', {
+		// 	method: 'POST',
+		// 	body: formData,
+		// }).then((r) => r.json());
+
+		// console.log('link gambar', data.secure_url);
+		// setForm({
+		// 	...form,
+		// 	linkGambar: data.secure_url,
+		// });
+
+		// const errs = validate();
+		// setErrors(errs);
+		// setIsSubmitting(false);
+
+		//kalo ga pake upload file
 		e.preventDefault();
-
-		const Form = e.currentTarget;
-		const fileInput = Array.from(Form.elements).find(({ name }) => name === 'file');
-
-		const formData = new FormData();
-
-		for (const file of fileInput.files) {
-			formData.append('file', file);
-		}
-
-		formData.append('upload_preset', 'thinker');
-
-		const data = await fetch('https://api.cloudinary.com/v1_1/cloud51/image/upload', {
-			method: 'POST',
-			body: formData,
-		}).then((r) => r.json());
-
-		console.log('link gambar', data.secure_url);
-		setForm({
-			...form,
-			linkGambar: data.secure_url,
-		});
-
 		const errs = validate();
 		setErrors(errs);
-		setIsSubmitting(false);
+		setIsSubmitting(true);
 	};
 
 	const handleChange = (e) => {
@@ -387,7 +394,22 @@ const NewProduct = () => {
 										value={form.terjual}
 										onChange={handleChange}
 									/>
-									<div>
+									<h3>Link Gambar</h3>
+									<Form.Input
+										error={
+											errors.linkGambar
+												? {
+														content: 'Please enter a link gambar',
+														pointing: 'below',
+												  }
+												: null
+										}
+										placeholder="Link Gambar"
+										name="linkGambar"
+										value={form.linkGambar}
+										onChange={handleChange}
+									/>
+									{/* <div>
 										<Button as="label" htmlFor="file" type="button">
 											Unggah Gambar
 										</Button>
@@ -397,7 +419,7 @@ const NewProduct = () => {
 											name="file"
 											style={{ display: 'hidden' }}
 										/>
-									</div>
+									</div> */}
 									<div className="pt-4">
 										<Button basic color="blue" type="submit">
 											Buat
