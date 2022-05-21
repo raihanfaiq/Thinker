@@ -24,8 +24,8 @@ const Index = ({ products, address, provider, hardcopy, softcopy, konsultasi, em
 		amount = Math.round((provider?.harga + totalProduct) / 14477);
 	} else if (!hardcopy && (softcopy || konsultasi)) {
 		amount = Math.round((1000 + totalProduct) / 14477);
-	} else if (!hardcopy && !(softcopy || konsultasi)) {
-		amount = Math.round((1000 + totalProduct) / 14477);
+	} else if (hardcopy && (softcopy || konsultasi)) {
+		amount = Math.round((provider?.harga + 1000 + totalProduct) / 14477);
 	}
 
 	// This values are the props in the UI
@@ -269,11 +269,12 @@ const Index = ({ products, address, provider, hardcopy, softcopy, konsultasi, em
 												</div>
 											)}
 
-											{hardcopy && !provider ? (
+											{hardcopy && !provider && (
 												<div className="text-xl text-gray-500 truncate">
 													Silakan Pilih Provider
 												</div>
-											) : (
+											)}
+											{hardcopy && provider && (
 												<div className="flex row flex-bs mt-3">
 													<div className="text-xl truncate">
 														{provider?.nama} - {provider?.layanan}
